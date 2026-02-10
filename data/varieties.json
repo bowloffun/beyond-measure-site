@@ -1,0 +1,10 @@
+{
+  "varieties": [
+    { "name": "Sunflowers", "emoji": "🌻" },
+    { "name": "Zinnias", "emoji": "🌸" },
+    { "name": "Celosia", "emoji": "🔥" },
+    { "name": "Gomphrena", "emoji": "💜" },
+    { "name": "Seasonal Greens", "emoji": "🌿" },
+    { "name": "& More Each Season", "emoji": "✨" }
+  ]
+}
