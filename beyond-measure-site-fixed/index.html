@@ -1,0 +1,1776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beyond Measure Flowers — Farm Fresh Blooms from Ohio</title>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF6F0;
+    --warm-white: #FFFDF9;
+    --sage: #8B9E7E;
+    --sage-dark: #6B7F5E;
+    --sage-light: #C5D4B8;
+    --terracotta: #C17B5A;
+    --terracotta-light: #E8A882;
+    --earth: #8B7355;
+    --blush: #E8C4B8;
+    --blush-light: #F5E1D8;
+    --charcoal: #2C2C2C;
+    --text: #3A3A3A;
+    --text-light: #6B6B6B;
+    --gold: #C4A265;
+    --dusty-rose: #C9918A;
+    --lavender: #B8A9C9;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* ===== NAVIGATION ===== */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.4s ease;
+    background: transparent;
+  }
+
+  nav.scrolled {
+    background: rgba(250, 246, 240, 0.95);
+    backdrop-filter: blur(20px);
+    padding: 14px 40px;
+    box-shadow: 0 1px 20px rgba(0,0,0,0.05);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: var(--charcoal);
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+    align-items: center;
+  }
+
+  .nav-links a {
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text);
+    text-decoration: none;
+    position: relative;
+    transition: color 0.3s;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1.5px;
+    background: var(--terracotta);
+    transition: width 0.3s ease;
+  }
+
+  .nav-links a:hover::after { width: 100%; }
+  .nav-links a:hover { color: var(--terracotta); }
+
+  .nav-cta {
+    background: var(--sage) !important;
+    color: white !important;
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-size: 0.8rem !important;
+    letter-spacing: 0.1em !important;
+    transition: background 0.3s, transform 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--sage-dark) !important; transform: translateY(-1px); }
+  .nav-cta::after { display: none !important; }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 8px;
+  }
+  .hamburger span {
+    width: 24px;
+    height: 2px;
+    background: var(--charcoal);
+    transition: all 0.3s;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--cream) 0%, var(--blush-light) 50%, var(--cream) 100%);
+  }
+
+  .hero-bg-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.06;
+    background-image:
+      radial-gradient(circle at 20% 50%, var(--sage) 1px, transparent 1px),
+      radial-gradient(circle at 80% 20%, var(--terracotta) 1px, transparent 1px),
+      radial-gradient(circle at 60% 80%, var(--dusty-rose) 1px, transparent 1px);
+    background-size: 80px 80px, 120px 120px, 100px 100px;
+  }
+
+  .hero-content {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 120px 40px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-text { animation: fadeUp 1s ease 0.2s both; }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    background: rgba(139, 158, 126, 0.12);
+    border-radius: 50px;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--sage-dark);
+    margin-bottom: 28px;
+    font-weight: 500;
+  }
+
+  .hero-badge::before { content: '✿'; font-size: 1rem; }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 5.5vw, 5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--charcoal);
+    margin-bottom: 24px;
+    letter-spacing: -0.01em;
+  }
+
+  h1 em { font-style: italic; color: var(--terracotta); font-weight: 400; }
+
+  .hero-desc {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    max-width: 480px;
+    line-height: 1.75;
+    margin-bottom: 40px;
+    font-weight: 300;
+  }
+
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 36px;
+    border-radius: 50px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary { background: var(--terracotta); color: white; }
+  .btn-primary:hover { background: #a8664a; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(193,123,90,0.3); }
+
+  .btn-outline { background: transparent; color: var(--text); border: 1.5px solid var(--text); }
+  .btn-outline:hover { background: var(--charcoal); color: white; transform: translateY(-2px); }
+
+  .hero-visual { position: relative; animation: fadeUp 1s ease 0.4s both; }
+
+  .hero-image-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 16px;
+    aspect-ratio: 1;
+  }
+
+  .hero-img { border-radius: 20px; overflow: hidden; position: relative; }
+  .hero-img:first-child { grid-row: span 2; border-radius: 120px 20px 20px 120px; }
+
+  .hero-img-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    flex-direction: column;
+    gap: 8px;
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  .hero-img:nth-child(1) .hero-img-placeholder { background: linear-gradient(160deg, var(--sage-light), var(--sage)); color: white; }
+  .hero-img:nth-child(2) .hero-img-placeholder { background: linear-gradient(160deg, var(--blush), var(--dusty-rose)); color: white; border-radius: 20px; }
+  .hero-img:nth-child(3) .hero-img-placeholder { background: linear-gradient(160deg, var(--terracotta-light), var(--terracotta)); color: white; border-radius: 20px 20px 20px 80px; }
+
+  .hero-stat-float {
+    position: absolute;
+    bottom: -20px;
+    left: -20px;
+    background: white;
+    border-radius: 20px;
+    padding: 20px 28px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    animation: float 3s ease-in-out infinite;
+    z-index: 3;
+  }
+
+  .hero-stat-float .number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--terracotta);
+  }
+
+  .hero-stat-float .label {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-light);
+  }
+
+  /* ===== SEASONAL BANNER ===== */
+  .season-banner {
+    background: var(--sage);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .season-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--terracotta-light);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  /* ===== SECTIONS ===== */
+  section { padding: 100px 40px; }
+
+  .section-header { text-align: center; margin-bottom: 64px; }
+
+  .section-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    font-weight: 300;
+    color: var(--charcoal);
+    line-height: 1.15;
+  }
+
+  h2 em { font-style: italic; color: var(--terracotta); font-weight: 400; }
+
+  .section-desc {
+    font-size: 1rem;
+    color: var(--text-light);
+    max-width: 560px;
+    margin: 16px auto 0;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  /* ===== WHAT WE GROW ===== */
+  #what-we-grow { background: var(--warm-white); }
+
+  .grow-grid {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+  }
+
+  .grow-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: white;
+    padding: 14px 28px;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: var(--charcoal);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    transition: all 0.3s;
+  }
+
+  .grow-chip:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+
+  .grow-chip .chip-emoji { font-size: 1.3rem; }
+
+  .grow-note {
+    text-align: center;
+    margin-top: 32px;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  /* ===== SHOP / MARKET ===== */
+  #shop { background: var(--cream); }
+
+  .shop-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .product-card {
+    background: white;
+    border-radius: 24px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .product-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,0.08); }
+
+  .product-image {
+    aspect-ratio: 4/5;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-image-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 4rem;
+    transition: transform 0.6s ease;
+  }
+
+  .product-card:hover .product-image-inner { transform: scale(1.05); }
+
+  .product-tag {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: white;
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--sage-dark);
+  }
+
+  .product-info { padding: 24px 28px 28px; }
+
+  .product-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--charcoal);
+    margin-bottom: 6px;
+  }
+
+  .product-desc {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-bottom: 16px;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  .product-footer { display: flex; justify-content: space-between; align-items: center; }
+
+  .product-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--terracotta);
+  }
+
+  .product-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--sage);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s;
+  }
+
+  .product-btn:hover { background: var(--sage-dark); transform: scale(1.1); }
+
+  .market-note {
+    max-width: 700px;
+    margin: 48px auto 0;
+    text-align: center;
+    background: white;
+    border-radius: 20px;
+    padding: 32px 40px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+  }
+
+  .market-note-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--charcoal);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .market-note p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  /* ===== CSA SECTION ===== */
+  #csa { background: var(--warm-white); position: relative; overflow: hidden; }
+
+  .csa-layout {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .csa-intro {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .csa-how-it-works {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+
+  .hiw-step {
+    text-align: center;
+    padding: 32px 24px;
+    background: white;
+    border-radius: 20px;
+    position: relative;
+  }
+
+  .hiw-number {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--terracotta);
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  .hiw-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: var(--charcoal);
+  }
+
+  .hiw-desc {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* CSA Date Picker Card */
+  .csa-picker-card {
+    background: white;
+    border-radius: 28px;
+    padding: 48px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.06);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .csa-picker-header {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .csa-picker-header h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: var(--charcoal);
+    margin-bottom: 8px;
+  }
+
+  .csa-picker-header p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-weight: 300;
+  }
+
+  .csa-selection-count {
+    text-align: center;
+    margin-bottom: 24px;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    font-weight: 400;
+  }
+
+  .csa-selection-count strong {
+    color: var(--terracotta);
+    font-weight: 600;
+  }
+
+  .csa-dates-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .csa-date-btn {
+    padding: 16px 20px;
+    border: 2px solid #e8e4de;
+    border-radius: 14px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-family: 'Jost', sans-serif;
+  }
+
+  .csa-date-btn:hover { border-color: var(--sage); background: rgba(139,158,126,0.04); }
+
+  .csa-date-btn.selected {
+    border-color: var(--sage);
+    background: rgba(139,158,126,0.08);
+  }
+
+  .csa-date-btn.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .csa-date-check {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    border-radius: 50%;
+    border: 2px solid #d0ccc6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    color: transparent;
+    transition: all 0.25s;
+  }
+
+  .csa-date-btn.selected .csa-date-check {
+    background: var(--sage);
+    border-color: var(--sage);
+    color: white;
+  }
+
+  .csa-date-info { flex: 1; }
+
+  .csa-date-day {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--charcoal);
+  }
+
+  .csa-date-full {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    font-weight: 300;
+  }
+
+  .csa-date-spots {
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sage-dark);
+    font-weight: 500;
+  }
+
+  .csa-summary {
+    background: var(--cream);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+
+  .csa-summary-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 500;
+    margin-bottom: 12px;
+    color: var(--charcoal);
+  }
+
+  .csa-summary-dates {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-height: 100px;
+  }
+
+  .csa-summary-dates li {
+    font-size: 0.85rem;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 300;
+  }
+
+  .csa-summary-dates li::before {
+    content: '🌸';
+    font-size: 0.8rem;
+  }
+
+  .csa-summary-empty {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    font-style: italic;
+    font-weight: 300;
+    padding: 8px 0;
+  }
+
+  .csa-price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #e0dcd5;
+  }
+
+  .csa-price-label {
+    font-size: 0.9rem;
+    color: var(--text-light);
+  }
+
+  .csa-price-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--terracotta);
+  }
+
+  .csa-checkout-btn {
+    width: 100%;
+    padding: 18px;
+    background: var(--terracotta);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .csa-checkout-btn.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .csa-checkout-btn.active:hover { background: #a8664a; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(193,123,90,0.3); }
+
+  /* ===== SEASONAL CALENDAR ===== */
+  #seasonal { background: var(--cream); }
+
+  .calendar-strip {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    gap: 4px;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  .cal-month {
+    flex: 1;
+    padding: 24px 8px;
+    text-align: center;
+    transition: all 0.3s;
+    cursor: default;
+    position: relative;
+  }
+
+  .cal-month.active {
+    background: var(--sage);
+    color: white;
+  }
+
+  .cal-month.off {
+    background: #eae6df;
+    color: var(--text-light);
+    opacity: 0.6;
+  }
+
+  .cal-month-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .cal-month.active .cal-month-name { color: white; }
+
+  .cal-month-emoji { font-size: 1.2rem; margin-bottom: 4px; }
+
+  .cal-month-label {
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    opacity: 0.7;
+  }
+
+  .cal-month.active .cal-month-label { opacity: 0.85; }
+
+  .seasonal-details {
+    max-width: 800px;
+    margin: 40px auto 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .seasonal-detail-card {
+    background: white;
+    border-radius: 16px;
+    padding: 28px;
+    border-left: 4px solid var(--sage);
+  }
+
+  .seasonal-detail-card h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--charcoal);
+    margin-bottom: 8px;
+  }
+
+  .seasonal-detail-card p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* ===== WEDDINGS ===== */
+  #weddings {
+    background: var(--charcoal);
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #weddings::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 70%, rgba(139,158,126,0.12), transparent 60%),
+                radial-gradient(circle at 80% 30%, rgba(193,123,90,0.08), transparent 50%);
+  }
+
+  .weddings-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .weddings-content .section-tag { color: var(--sage-light); }
+  .weddings-content h2 { color: white; margin-bottom: 20px; }
+  .weddings-content h2 em { color: var(--terracotta-light); }
+
+  .weddings-desc {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.7);
+    font-weight: 300;
+    line-height: 1.8;
+    margin-bottom: 16px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .weddings-features {
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+    margin: 36px 0 40px;
+    flex-wrap: wrap;
+  }
+
+  .wedding-feat {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.75);
+    font-weight: 300;
+  }
+
+  .wedding-feat-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+  }
+
+  .weddings-contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 18px 40px;
+    border-radius: 50px;
+    background: var(--terracotta);
+    color: white;
+    border: none;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+  }
+
+  .weddings-contact-btn:hover { background: #a8664a; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(193,123,90,0.3); }
+
+  .weddings-limited {
+    margin-top: 20px;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.4);
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  /* ===== ABOUT ===== */
+  #about { background: var(--warm-white); }
+
+  .about-layout {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .about-images { display: flex; gap: 20px; }
+
+  .about-img {
+    flex: 1;
+    border-radius: 20px;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+  }
+
+  .about-img:first-child { background: linear-gradient(160deg, var(--sage-light), var(--sage)); margin-top: 40px; }
+  .about-img:last-child { background: linear-gradient(160deg, var(--blush), var(--terracotta-light)); margin-top: -40px; }
+
+  .about-text .section-tag { display: block; margin-bottom: 12px; }
+  .about-text h2 { text-align: left; margin-bottom: 24px; }
+
+  .about-text p {
+    font-size: 1rem;
+    color: var(--text-light);
+    line-height: 1.8;
+    margin-bottom: 20px;
+    font-weight: 300;
+  }
+
+  .about-values {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  .value-item {
+    background: white;
+    border-radius: 16px;
+    padding: 22px;
+    border: 1px solid #ebe7e0;
+  }
+
+  .value-icon { font-size: 1.4rem; margin-bottom: 10px; }
+
+  .value-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+    color: var(--charcoal);
+  }
+
+  .value-desc {
+    font-size: 0.78rem;
+    color: var(--text-light);
+    line-height: 1.5;
+    font-weight: 300;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--charcoal);
+    color: white;
+    padding: 80px 40px 40px;
+  }
+
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px;
+  }
+
+  .footer-brand .nav-logo { color: white; font-size: 1.8rem; display: block; margin-bottom: 16px; }
+
+  .footer-brand p {
+    color: rgba(255,255,255,0.5);
+    font-size: 0.9rem;
+    font-weight: 300;
+    line-height: 1.7;
+    max-width: 300px;
+  }
+
+  .footer-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+
+  .footer-links a {
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 300;
+    transition: color 0.3s;
+  }
+
+  .footer-links a:hover { color: var(--terracotta-light); }
+
+  .footer-bottom {
+    max-width: 1200px;
+    margin: 50px auto 0;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.35);
+    font-weight: 300;
+  }
+
+  .social-links { display: flex; gap: 16px; }
+
+  .social-links a {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    transition: all 0.3s;
+    font-size: 0.95rem;
+  }
+
+  .social-links a:hover { background: var(--terracotta); color: white; }
+
+  /* ===== CART DRAWER ===== */
+  .cart-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+
+  .cart-overlay.open { opacity: 1; pointer-events: all; }
+
+  .cart-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 420px;
+    max-width: 100%;
+    height: 100%;
+    background: white;
+    z-index: 2001;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cart-drawer.open { transform: translateX(0); }
+
+  .cart-header {
+    padding: 28px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .cart-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+
+  .cart-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-light);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+  }
+
+  .cart-close:hover { background: #f5f5f5; }
+
+  .cart-items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 28px;
+  }
+
+  .cart-empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-light);
+    font-size: 0.95rem;
+  }
+
+  .cart-empty span { font-size: 3rem; display: block; margin-bottom: 16px; }
+
+  .cart-item {
+    display: flex;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid #f0f0f0;
+    align-items: center;
+  }
+
+  .cart-item-img {
+    width: 64px;
+    height: 64px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    flex-shrink: 0;
+  }
+
+  .cart-item-info { flex: 1; }
+
+  .cart-item-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+
+  .cart-item-price { font-size: 0.9rem; color: var(--terracotta); font-weight: 500; }
+
+  .cart-item-detail { font-size: 0.75rem; color: var(--text-light); font-weight: 300; margin-top: 2px; }
+
+  .cart-item-qty { display: flex; align-items: center; gap: 10px; margin-top: 6px; }
+
+  .qty-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    background: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+  }
+
+  .qty-btn:hover { background: #f5f5f5; }
+
+  .cart-footer { padding: 28px; border-top: 1px solid #eee; }
+
+  .cart-total { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+
+  .cart-total-label { font-size: 0.9rem; color: var(--text-light); }
+
+  .cart-total-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--charcoal);
+  }
+
+  .checkout-btn {
+    width: 100%;
+    padding: 18px;
+    background: var(--terracotta);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .checkout-btn:hover { background: #a8664a; }
+
+  /* ===== TOAST ===== */
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: var(--charcoal);
+    color: white;
+    padding: 16px 28px;
+    border-radius: 16px;
+    font-size: 0.9rem;
+    z-index: 3000;
+    transform: translateY(120%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+  }
+
+  .toast.show { transform: translateY(0); }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1024px) {
+    .hero-content { grid-template-columns: 1fr; text-align: center; }
+    .hero-desc { margin-left: auto; margin-right: auto; }
+    .hero-actions { justify-content: center; }
+    .hero-visual { max-width: 500px; margin: 0 auto; }
+    .about-layout { grid-template-columns: 1fr; }
+    .about-images { max-width: 400px; margin: 0 auto; }
+    .about-text h2, .about-text .section-tag { text-align: center; }
+    .about-text p { text-align: center; }
+    .footer-content { grid-template-columns: 1fr 1fr; gap: 40px; }
+  }
+
+  @media (max-width: 768px) {
+    section { padding: 70px 20px; }
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .nav-links.mobile-open {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: rgba(250,246,240,0.98);
+      backdrop-filter: blur(20px);
+      padding: 20px;
+      gap: 20px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    }
+    .hero-content { padding: 100px 20px 60px; }
+    .hero-image-grid { aspect-ratio: auto; grid-template-columns: 1fr 1fr; grid-template-rows: 200px 200px; }
+    .hero-img:first-child { grid-row: span 2; border-radius: 80px 20px 20px 80px; }
+    .csa-how-it-works { grid-template-columns: 1fr; }
+    .csa-dates-grid { grid-template-columns: 1fr; }
+    .csa-picker-card { padding: 28px 20px; }
+    .calendar-strip { flex-wrap: wrap; border-radius: 16px; }
+    .cal-month { min-width: calc(25% - 3px); }
+    .seasonal-details { grid-template-columns: 1fr; }
+    .weddings-features { flex-direction: column; align-items: center; }
+    .about-values { grid-template-columns: 1fr; }
+    .footer-content { grid-template-columns: 1fr; gap: 30px; }
+    .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
+    .cart-drawer { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+
+<!-- Navigation -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">Beyond Measure</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#shop">Market</a></li>
+    <li><a href="#csa">Flower CSA</a></li>
+    <li><a href="#seasonal">What's Blooming</a></li>
+    <li><a href="#weddings">Events</a></li>
+    <li><a href="#about">Our Story</a></li>
+    <li><a href="#" class="nav-cta" onclick="event.preventDefault(); openCart()">Cart (0)</a></li>
+  </ul>
+  <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-badge">Year Three — Ohio Flower Farm</div>
+      <h1>Flowers Grown with <em>Love</em> & Intention</h1>
+      <p class="hero-desc" id="heroDesc">Zinnias, sunflowers, celosia, and more — cultivated with care in the heart of Ohio. Fresh-cut from our field to your hands, July through first frost.</p>
+      <div class="hero-actions">
+        <a href="#shop" class="btn btn-primary">Shop Blooms</a>
+        <a href="#csa" class="btn btn-outline">Join Our CSA</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-image-grid">
+        <div class="hero-img">
+          <div class="hero-img-placeholder">🌻<span style="font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase">Field Grown</span></div>
+        </div>
+        <div class="hero-img">
+          <div class="hero-img-placeholder">🌿<span style="font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase">Seasonal</span></div>
+        </div>
+        <div class="hero-img">
+          <div class="hero-img-placeholder">💐<span style="font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase">Local</span></div>
+        </div>
+      </div>
+      <div class="hero-stat-float">
+        <div class="number">Jul–Oct</div>
+        <div class="label">Growing Season</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Season Banner -->
+<div class="season-banner">
+  <span class="season-dot"></span>
+  <span id="seasonBanner">2026 Summer CSA — Now accepting signups · Limited spots available</span>
+  <span class="season-dot"></span>
+</div>
+
+<!-- What We Grow -->
+<section id="what-we-grow">
+  <div class="section-header reveal">
+    <div class="section-tag">From Our Field</div>
+    <h2>What We <em>Grow</em></h2>
+    <p class="section-desc">We focus on a curated selection of hardy, vibrant varieties that thrive in Ohio summers and look stunning in every arrangement.</p>
+  </div>
+  <div class="grow-grid reveal">
+    <div class="grow-chip"><span class="chip-emoji">🌻</span> Sunflowers</div>
+    <div class="grow-chip"><span class="chip-emoji">🌸</span> Zinnias</div>
+    <div class="grow-chip"><span class="chip-emoji">🔥</span> Celosia</div>
+    <div class="grow-chip"><span class="chip-emoji">💜</span> Gomphrena</div>
+    <div class="grow-chip"><span class="chip-emoji">🌿</span> Seasonal Greens</div>
+    <div class="grow-chip"><span class="chip-emoji">✨</span> & More Each Season</div>
+  </div>
+  <p class="grow-note reveal">We're always experimenting and adding new varieties as we grow — stay tuned!</p>
+</section>
+
+<!-- Shop / Market -->
+<section id="shop">
+  <div class="section-header reveal">
+    <div class="section-tag">Farmers Market & Online</div>
+    <h2>Fresh <em>Blooms</em></h2>
+    <p class="section-desc">Find us at the market or order ahead. All flowers are cut fresh the day of — no middlemen, no warehouses, just field to vase.</p>
+  </div>
+  <div class="shop-grid reveal" id="shopGrid"></div>
+  <div class="market-note reveal">
+    <div class="market-note-title">📍 Find Us at the Market</div>
+    <p id="marketNote">We'll be at a local farmers market this summer — details coming soon! Follow us on social media to be the first to know where and when you can find us.</p>
+  </div>
+</section>
+
+<!-- CSA Section -->
+<section id="csa">
+  <div class="csa-layout">
+    <div class="section-header reveal">
+      <div class="section-tag">Summer Flower CSA</div>
+      <h2>A Summer of <em>Blooms</em></h2>
+      <p class="section-desc" id="csaDesc">Pick 4 pickup dates over our 8-week season and receive a gorgeous, hand-tied bouquet each time. Choose the days that work for your schedule.</p>
+    </div>
+
+    <div class="csa-how-it-works reveal">
+      <div class="hiw-step">
+        <div class="hiw-number">1</div>
+        <div class="hiw-title">Choose Your Dates</div>
+        <div class="hiw-desc">Select 4 pickup dates from our available Tuesdays and Fridays/Saturdays throughout the season.</div>
+      </div>
+      <div class="hiw-step">
+        <div class="hiw-number">2</div>
+        <div class="hiw-title">Pay Once & You're Set</div>
+        <div class="hiw-desc">One simple payment covers all 4 of your bouquets for the summer. No subscriptions or recurring charges.</div>
+      </div>
+      <div class="hiw-step">
+        <div class="hiw-number">3</div>
+        <div class="hiw-title">Pick Up & Enjoy</div>
+        <div class="hiw-desc">Grab your fresh bouquet on your selected dates. Each one will be different — a seasonal surprise every time!</div>
+      </div>
+    </div>
+
+    <div class="csa-picker-card reveal" id="csaPickerCard">
+      <div class="csa-picker-header">
+        <h3>Choose Your 4 Pickup Dates</h3>
+        <p>Select any 4 dates from the options below</p>
+      </div>
+      <div class="csa-selection-count">
+        <strong id="csaCount">0</strong> of 4 dates selected
+      </div>
+      <div class="csa-dates-grid" id="csaDatesGrid"></div>
+      <div class="csa-summary">
+        <div class="csa-summary-title">Your Selected Dates</div>
+        <ul class="csa-summary-dates" id="csaSummaryDates">
+          <li class="csa-summary-empty">No dates selected yet — pick 4 above!</li>
+        </ul>
+        <div class="csa-price-row">
+          <span class="csa-price-label">4-Bouquet CSA Package</span>
+          <span class="csa-price-amount" id="csaPriceDisplay">$XX</span>
+        </div>
+      </div>
+      <button class="csa-checkout-btn" id="csaCheckoutBtn" onclick="csaCheckout()">
+        Select 4 dates to continue
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Seasonal Calendar -->
+<section id="seasonal">
+  <div class="section-header reveal">
+    <div class="section-tag">Our Season</div>
+    <h2>When We're <em>Blooming</em></h2>
+    <p class="section-desc">We harvest from July through first frost in October. Here's what to expect through the season.</p>
+  </div>
+  <div class="calendar-strip reveal">
+    <div class="cal-month off"><div class="cal-month-emoji">❄️</div><div class="cal-month-name">Jan</div><div class="cal-month-label">Off</div></div>
+    <div class="cal-month off"><div class="cal-month-emoji">❄️</div><div class="cal-month-name">Feb</div><div class="cal-month-label">Off</div></div>
+    <div class="cal-month off"><div class="cal-month-emoji">🌱</div><div class="cal-month-name">Mar</div><div class="cal-month-label">Planning</div></div>
+    <div class="cal-month off"><div class="cal-month-emoji">🌱</div><div class="cal-month-name">Apr</div><div class="cal-month-label">Planting</div></div>
+    <div class="cal-month off"><div class="cal-month-emoji">🌱</div><div class="cal-month-name">May</div><div class="cal-month-label">Growing</div></div>
+    <div class="cal-month off"><div class="cal-month-emoji">🌿</div><div class="cal-month-name">Jun</div><div class="cal-month-label">Growing</div></div>
+    <div class="cal-month active"><div class="cal-month-emoji">🌻</div><div class="cal-month-name">Jul</div><div class="cal-month-label">Harvest</div></div>
+    <div class="cal-month active"><div class="cal-month-emoji">🌸</div><div class="cal-month-name">Aug</div><div class="cal-month-label">Peak</div></div>
+    <div class="cal-month active"><div class="cal-month-emoji">🌺</div><div class="cal-month-name">Sep</div><div class="cal-month-label">Harvest</div></div>
+    <div class="cal-month active"><div class="cal-month-emoji">🍂</div><div class="cal-month-name">Oct</div><div class="cal-month-label">Last Call</div></div>
+    <div class="cal-month off"><div class="cal-month-emoji">🍁</div><div class="cal-month-name">Nov</div><div class="cal-month-label">Off</div></div>
+    <div class="cal-month off"><div class="cal-month-emoji">❄️</div><div class="cal-month-name">Dec</div><div class="cal-month-label">Off</div></div>
+  </div>
+  <div class="seasonal-details reveal">
+    <div class="seasonal-detail-card">
+      <h4>🌻 July — Early Harvest</h4>
+      <p>The first sunflowers and zinnias arrive! Early celosia and gomphrena start filling out the field with bold color.</p>
+    </div>
+    <div class="seasonal-detail-card">
+      <h4>🌸 August — Peak Season</h4>
+      <p>The field is bursting. Zinnias are at their most prolific, dahlias may make an appearance, and bouquets are lush and full.</p>
+    </div>
+    <div class="seasonal-detail-card">
+      <h4>🌺 September — Rich Tones</h4>
+      <p>Warm autumn colors take over — deep reds, oranges, and burgundies. Celosia and gomphrena shine this time of year.</p>
+    </div>
+    <div class="seasonal-detail-card">
+      <h4>🍂 October — Last Call</h4>
+      <p>We harvest until first frost. Final bouquets feature the last of the season's beauty — grab them while they last!</p>
+    </div>
+  </div>
+</section>
+
+<!-- Weddings & Events -->
+<section id="weddings">
+  <div class="weddings-content reveal">
+    <div class="section-tag">Weddings & Events</div>
+    <h2>Flowers for Your <em>Special Day</em></h2>
+    <p class="weddings-desc" id="weddingsDesc">We take on a limited number of weddings and events each season, giving every celebration our full attention. Our farm-grown flowers bring a natural, seasonal beauty that can't be replicated.</p>
+    <div class="weddings-features">
+      <div class="wedding-feat">
+        <div class="wedding-feat-icon">💐</div>
+        Bridal & bridesmaid bouquets
+      </div>
+      <div class="wedding-feat">
+        <div class="wedding-feat-icon">🏛️</div>
+        Ceremony & reception florals
+      </div>
+      <div class="wedding-feat">
+        <div class="wedding-feat-icon">🌿</div>
+        Seasonal, farm-fresh blooms
+      </div>
+    </div>
+    <a href="mailto:hello@beyondmeasureflowers.com" class="weddings-contact-btn">Get in Touch</a>
+    <p class="weddings-limited">We book a limited number of events per season to ensure quality — reach out early to secure your date.</p>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about">
+  <div class="about-layout">
+    <div class="about-images reveal">
+      <div class="about-img">🌻</div>
+      <div class="about-img">🌾</div>
+    </div>
+    <div class="about-text reveal">
+      <div class="section-tag">Our Story</div>
+      <h2>Growing Into Our <em>Third Year</em></h2>
+      <p id="aboutP1">Beyond Measure Flowers is a small cut flower farm in Ohio, heading into our third growing season. What started as a love for growing beautiful things has turned into a passion for sharing them with our community.</p>
+      <p id="aboutP2">We focus on a curated selection of varieties — zinnias, sunflowers, celosia, gomphrena, and a few surprises — grown with care and harvested at their peak. Every stem we sell is something we grew ourselves, and we think that makes all the difference.</p>
+      <p id="aboutP3">We're still growing and learning every season, and we love bringing people along for the ride.</p>
+      <div class="about-values">
+        <div class="value-item">
+          <div class="value-icon">🌱</div>
+          <div class="value-title">Field to Vase</div>
+          <div class="value-desc">Every flower we sell is grown right here on our farm.</div>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">✂️</div>
+          <div class="value-title">Fresh Cut</div>
+          <div class="value-desc">Harvested the day of sale for maximum vase life.</div>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">🏡</div>
+          <div class="value-title">Family Grown</div>
+          <div class="value-desc">A family project rooted in love and hard work.</div>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">🤝</div>
+          <div class="value-title">Community Focused</div>
+          <div class="value-desc">Supporting local and connecting through flowers.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-content">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo">Beyond Measure</a>
+      <p>A small Ohio flower farm, growing seasonal blooms with love. July through first frost.</p>
+    </div>
+    <div>
+      <div class="footer-heading">Shop</div>
+      <ul class="footer-links">
+        <li><a href="#shop">Market Blooms</a></li>
+        <li><a href="#csa">Flower CSA</a></li>
+        <li><a href="#seasonal">What's Blooming</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Learn</div>
+      <ul class="footer-links">
+        <li><a href="#about">Our Story</a></li>
+        <li><a href="#weddings">Weddings & Events</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Connect</div>
+      <ul class="footer-links">
+        <li><a href="mailto:hello@beyondmeasureflowers.com">Email Us</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Facebook</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Beyond Measure Flowers. All rights reserved.</span>
+    <div class="social-links">
+      <a href="#" aria-label="Instagram">📷</a>
+      <a href="#" aria-label="Facebook">👤</a>
+      <a href="mailto:hello@beyondmeasureflowers.com" aria-label="Email">✉️</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Cart Overlay & Drawer -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-header">
+    <div class="cart-title">Your Cart</div>
+    <button class="cart-close" onclick="closeCart()">×</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty"><span>🌸</span>Your cart is empty.<br>Add some beautiful blooms!</div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none;">
+    <div class="cart-total">
+      <span class="cart-total-label">Subtotal</span>
+      <span class="cart-total-price" id="cartTotal">$0</span>
+    </div>
+    <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+var productBgs = [
+  'linear-gradient(160deg, #F5E1D8, #E8C4B8)',
+  'linear-gradient(160deg, #C5D4B8, #A8C495)',
+  'linear-gradient(160deg, #F0DBA5, #D4A843)',
+  'linear-gradient(160deg, #B8A9C9, #8E7BAE)',
+  'linear-gradient(160deg, #E8C4B8, #C9918A)',
+  'linear-gradient(160deg, #C4A265, #A8864A)'
+];
+var products=[], csaDates=[], csaPrice='XX', selectedCsaDates=[], cart=[];
+
+async function loadData(){
+  try {
+    var res = await Promise.all([
+      fetch('/data/products.json').then(function(r){return r.json();}).catch(function(){return null;}),
+      fetch('/data/csa.json').then(function(r){return r.json();}).catch(function(){return null;}),
+      fetch('/data/content.json').then(function(r){return r.json();}).catch(function(){return null;}),
+      fetch('/data/varieties.json').then(function(r){return r.json();}).catch(function(){return null;})
+    ]);
+    var prodData=res[0], csaData=res[1], contentData=res[2], varData=res[3];
+    if(prodData&&prodData.products){products=prodData.products;renderProducts();}
+    if(csaData){
+      csaDates=csaData.dates.map(function(d,i){d.id='date-'+i;return d;});
+      csaPrice=csaData.price;
+      var pe=document.getElementById('csaPriceDisplay');if(pe)pe.textContent='$'+csaPrice;
+      if(csaData.description){var cd=document.getElementById('csaDesc');if(cd)cd.textContent=csaData.description;}
+      renderCsaDates();
+    }
+    if(contentData){
+      var map={'heroDesc':'hero_description','seasonBanner':'season_banner','marketNote':'market_note',
+        'aboutP1':'about_paragraph_1','aboutP2':'about_paragraph_2','aboutP3':'about_paragraph_3',
+        'weddingsDesc':'weddings_description'};
+      for(var id in map){var el=document.getElementById(id);if(el&&contentData[map[id]])el.textContent=contentData[map[id]];}
+      if(contentData.contact_email){
+        document.querySelectorAll('a[href*="mailto:"]').forEach(function(a){a.href='mailto:'+contentData.contact_email;});
+      }
+    }
+    if(varData&&varData.varieties){
+      var gg=document.getElementById('growGrid');
+      if(gg)gg.innerHTML=varData.varieties.map(function(v){return '<div class="grow-chip"><span class="chip-emoji">'+v.emoji+'</span> '+v.name+'</div>';}).join('');
+    }
+  }catch(e){console.log('Data load error:',e);}
+  document.querySelectorAll('.reveal').forEach(function(el){observer.observe(el);});
+}
+
+function renderProducts(){
+  var grid=document.getElementById('shopGrid');if(!grid)return;
+  grid.innerHTML=products.map(function(p,i){
+    var bg=productBgs[i%productBgs.length];
+    return '<div class="product-card reveal"><div class="product-image"><div class="product-image-inner" style="background:'+bg+'">'+p.emoji+'</div><div class="product-tag">'+p.tag+'</div></div><div class="product-info"><div class="product-name">'+p.name+'</div><div class="product-desc">'+p.description+'</div><div class="product-footer"><div class="product-price">$'+p.price+'</div><button class="product-btn" onclick="addProductToCart('+i+')" aria-label="Add to cart">+</button></div></div></div>';
+  }).join('');
+}
+
+function renderCsaDates(){
+  var grid=document.getElementById('csaDatesGrid');if(!grid)return;
+  grid.innerHTML=csaDates.map(function(d){
+    var sel=selectedCsaDates.indexOf(d.id)>-1;
+    var full=!sel&&selectedCsaDates.length>=4;
+    return '<button class="csa-date-btn '+(sel?'selected ':'')+(full?'disabled':'')+'" onclick="toggleCsaDate(\x27'+d.id+'\x27)"><div class="csa-date-check">'+(sel?'\u2713':'')+'</div><div class="csa-date-info"><div class="csa-date-day">'+d.day+'</div><div class="csa-date-full">'+d.date+'</div></div><div class="csa-date-spots">'+d.spots+' spots</div></button>';
+  }).join('');
+  document.getElementById('csaCount').textContent=selectedCsaDates.length;
+  var sm=document.getElementById('csaSummaryDates');
+  if(selectedCsaDates.length===0){sm.innerHTML='<li class="csa-summary-empty">No dates selected yet \u2014 pick 4 above!</li>';}
+  else{sm.innerHTML=selectedCsaDates.map(function(id){var d=csaDates.find(function(x){return x.id===id;});return '<li>'+d.day+', '+d.date+'</li>';}).join('');}
+  var btn=document.getElementById('csaCheckoutBtn');
+  if(selectedCsaDates.length===4){btn.classList.add('active');btn.textContent='Add CSA to Cart \u2014 $'+csaPrice;}
+  else{btn.classList.remove('active');var r=4-selectedCsaDates.length;btn.textContent='Select '+r+' more date'+(r!==1?'s':'')+' to continue';}
+}
+
+function toggleCsaDate(id){
+  var idx=selectedCsaDates.indexOf(id);
+  if(idx>-1)selectedCsaDates.splice(idx,1);
+  else if(selectedCsaDates.length<4)selectedCsaDates.push(id);
+  renderCsaDates();
+}
+
+function csaCheckout(){
+  if(selectedCsaDates.length!==4)return;
+  var labels=selectedCsaDates.map(function(id){var d=csaDates.find(function(x){return x.id===id;});return d.day+' '+d.date;});
+  cart.push({id:'csa-'+Date.now(),name:'Summer Flower CSA',price:csaPrice,emoji:'\ud83c\udf38',bg:'linear-gradient(160deg, #C5D4B8, #8B9E7E)',qty:1,detail:'4 pickups: '+labels.join(', '),isCSA:true});
+  renderCart();updateNavCart();openCart();showToast('\ud83c\udf38 CSA added to cart with your selected dates!');
+}
+
+function addProductToCart(index){
+  var p=products[index];if(!p)return;
+  var bg=productBgs[index%productBgs.length];
+  var existing=cart.find(function(item){return item.id===p.id;});
+  if(existing)existing.qty++;
+  else cart.push({id:p.id,name:p.name,price:p.price,emoji:p.emoji,bg:bg,qty:1});
+  renderCart();showToast(p.emoji+' '+p.name+' added to cart!');updateNavCart();
+}
+function removeFromCart(id){cart=cart.filter(function(item){return item.id!==id;});renderCart();updateNavCart();}
+function updateQty(id,delta){var item=cart.find(function(i){return i.id===id;});if(!item)return;item.qty+=delta;if(item.qty<=0)return removeFromCart(id);renderCart();updateNavCart();}
+function renderCart(){
+  var c=document.getElementById('cartItems'),f=document.getElementById('cartFooter');
+  if(cart.length===0){c.innerHTML='<div class="cart-empty"><span>\ud83c\udf38</span>Your cart is empty.<br>Add some beautiful blooms!</div>';f.style.display='none';return;}
+  f.style.display='block';
+  c.innerHTML=cart.map(function(item){
+    return '<div class="cart-item"><div class="cart-item-img" style="background:'+item.bg+'">'+item.emoji+'</div><div class="cart-item-info"><div class="cart-item-name">'+item.name+'</div><div class="cart-item-price">$'+item.price+'</div>'+(item.detail?'<div class="cart-item-detail">'+item.detail+'</div>':'')+(!item.isCSA?'<div class="cart-item-qty"><button class="qty-btn" onclick="updateQty(\x27'+item.id+'\x27,-1)">\u2212</button><span>'+item.qty+'</span><button class="qty-btn" onclick="updateQty(\x27'+item.id+'\x27,1)">+</button></div>':'<div style="margin-top:4px"><button class="qty-btn" onclick="removeFromCart(\x27'+item.id+'\x27)" style="width:auto;padding:0 10px;border-radius:8px;font-size:.7rem">Remove</button></div>')+'</div></div>';
+  }).join('');
+  var real=cart.every(function(item){return item.price!=='XX';});
+  document.getElementById('cartTotal').textContent=real?'$'+cart.reduce(function(s,i){return s+Number(i.price)*i.qty;},0):'$\u2014';
+}
+function updateNavCart(){var count=cart.reduce(function(s,i){return s+i.qty;},0);var link=document.querySelector('.nav-cta');if(link)link.textContent='Cart ('+count+')';}
+function openCart(){document.getElementById('cartOverlay').classList.add('open');document.getElementById('cartDrawer').classList.add('open');}
+function closeCart(){document.getElementById('cartOverlay').classList.remove('open');document.getElementById('cartDrawer').classList.remove('open');}
+function checkout(){showToast('\u2705 Checkout coming soon!');closeCart();}
+function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2500);}
+window.addEventListener('scroll',function(){document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);});
+function toggleMobileMenu(){document.getElementById('navLinks').classList.toggle('mobile-open');}
+var observer=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting)entry.target.classList.add('visible');});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(function(el){observer.observe(el);});
+if(window.netlifyIdentity){window.netlifyIdentity.on("init",function(user){if(!user){window.netlifyIdentity.on("login",function(){document.location.href="/admin/";});}});}
+loadData();
+</script>
+</body>
+</html>

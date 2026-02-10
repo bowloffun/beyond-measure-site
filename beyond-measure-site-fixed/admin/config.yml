@@ -1,0 +1,63 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - name: "products"
+        label: "Products & Pricing"
+        file: "data/products.json"
+        fields:
+          - name: "products"
+            label: "Products"
+            widget: "list"
+            fields:
+              - { name: "id", label: "ID (don't change)", widget: "string" }
+              - { name: "name", label: "Product Name", widget: "string" }
+              - { name: "description", label: "Description", widget: "text" }
+              - { name: "price", label: "Price (number only, no $)", widget: "string" }
+              - { name: "emoji", label: "Emoji Icon", widget: "string" }
+              - { name: "tag", label: "Tag (e.g. Signature, Popular)", widget: "string" }
+
+      - name: "csa"
+        label: "CSA Settings"
+        file: "data/csa.json"
+        fields:
+          - { name: "price", label: "CSA Total Price (number only, no $)", widget: "string" }
+          - { name: "description", label: "CSA Description", widget: "text" }
+          - name: "dates"
+            label: "Available Pickup Dates"
+            widget: "list"
+            fields:
+              - { name: "day", label: "Day of Week (e.g. Tuesday, Friday, Saturday)", widget: "string" }
+              - { name: "date", label: "Full Date (e.g. July 7, 2026)", widget: "string" }
+              - { name: "spots", label: "Number of Spots Available", widget: "number" }
+
+      - name: "content"
+        label: "Site Content"
+        file: "data/content.json"
+        fields:
+          - { name: "hero_description", label: "Hero Description", widget: "text" }
+          - { name: "season_banner", label: "Season Banner Text", widget: "string" }
+          - { name: "market_note", label: "Farmers Market Info", widget: "text" }
+          - { name: "about_paragraph_1", label: "About - Paragraph 1", widget: "text" }
+          - { name: "about_paragraph_2", label: "About - Paragraph 2", widget: "text" }
+          - { name: "about_paragraph_3", label: "About - Paragraph 3", widget: "text" }
+          - { name: "weddings_description", label: "Weddings Description", widget: "text" }
+          - { name: "contact_email", label: "Contact Email", widget: "string" }
+
+      - name: "varieties"
+        label: "What We Grow"
+        file: "data/varieties.json"
+        fields:
+          - name: "varieties"
+            label: "Flower Varieties"
+            widget: "list"
+            fields:
+              - { name: "name", label: "Variety Name", widget: "string" }
+              - { name: "emoji", label: "Emoji", widget: "string" }
