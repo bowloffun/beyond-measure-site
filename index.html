@@ -1715,7 +1715,7 @@ function renderCsaDates(){
   grid.innerHTML=csaDates.map(function(d){
     var sel=selectedCsaDates.indexOf(d.id)>-1;
     var full=!sel&&selectedCsaDates.length>=4;
-    return '<button class="csa-date-btn '+(sel?'selected ':'')+(full?'disabled':'')+'" onclick="toggleCsaDate(''+d.id+'')"><div class="csa-date-check">'+(sel?'\u2713':'')+'</div><div class="csa-date-info"><div class="csa-date-day">'+d.day+'</div><div class="csa-date-full">'+d.date+'</div></div><div class="csa-date-spots">'+d.spots+' spots</div></button>';
+    return '<button class="csa-date-btn '+(sel?'selected ':'')+(full?'disabled':'')+'" onclick="toggleCsaDate(\x27'+d.id+'\x27)"><div class="csa-date-check">'+(sel?'\u2713':'')+'</div><div class="csa-date-info"><div class="csa-date-day">'+d.day+'</div><div class="csa-date-full">'+d.date+'</div></div><div class="csa-date-spots">'+d.spots+' spots</div></button>';
   }).join('');
   document.getElementById('csaCount').textContent=selectedCsaDates.length;
   var sm=document.getElementById('csaSummaryDates');
@@ -1755,7 +1755,7 @@ function renderCart(){
   if(cart.length===0){c.innerHTML='<div class="cart-empty"><span>\ud83c\udf38</span>Your cart is empty.<br>Add some beautiful blooms!</div>';f.style.display='none';return;}
   f.style.display='block';
   c.innerHTML=cart.map(function(item){
-    return '<div class="cart-item"><div class="cart-item-img" style="background:'+item.bg+'">'+item.emoji+'</div><div class="cart-item-info"><div class="cart-item-name">'+item.name+'</div><div class="cart-item-price">$'+item.price+'</div>'+(item.detail?'<div class="cart-item-detail">'+item.detail+'</div>':'')+(!item.isCSA?'<div class="cart-item-qty"><button class="qty-btn" onclick="updateQty(''+item.id+'',-1)">\u2212</button><span>'+item.qty+'</span><button class="qty-btn" onclick="updateQty(''+item.id+'',1)">+</button></div>':'<div style="margin-top:4px"><button class="qty-btn" onclick="removeFromCart(''+item.id+'')" style="width:auto;padding:0 10px;border-radius:8px;font-size:.7rem">Remove</button></div>')+'</div></div>';
+    return '<div class="cart-item"><div class="cart-item-img" style="background:'+item.bg+'">'+item.emoji+'</div><div class="cart-item-info"><div class="cart-item-name">'+item.name+'</div><div class="cart-item-price">$'+item.price+'</div>'+(item.detail?'<div class="cart-item-detail">'+item.detail+'</div>':'')+(!item.isCSA?'<div class="cart-item-qty"><button class="qty-btn" onclick="updateQty(\x27'+item.id+'\x27,-1)">\u2212</button><span>'+item.qty+'</span><button class="qty-btn" onclick="updateQty(\x27'+item.id+'\x27,1)">+</button></div>':'<div style="margin-top:4px"><button class="qty-btn" onclick="removeFromCart(\x27'+item.id+'\x27)" style="width:auto;padding:0 10px;border-radius:8px;font-size:.7rem">Remove</button></div>')+'</div></div>';
   }).join('');
   var real=cart.every(function(item){return item.price!=='XX';});
   document.getElementById('cartTotal').textContent=real?'$'+cart.reduce(function(s,i){return s+Number(i.price)*i.qty;},0):'$\u2014';
@@ -1768,6 +1768,7 @@ function showToast(msg){var t=document.getElementById('toast');t.textContent=msg
 window.addEventListener('scroll',function(){document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);});
 function toggleMobileMenu(){document.getElementById('navLinks').classList.toggle('mobile-open');}
 var observer=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting)entry.target.classList.add('visible');});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(function(el){observer.observe(el);});
 if(window.netlifyIdentity){window.netlifyIdentity.on("init",function(user){if(!user){window.netlifyIdentity.on("login",function(){document.location.href="/admin/";});}});}
 loadData();
 </script>
