@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Beyond Measure Flowers — Farm Fresh Blooms from Ohio</title>
-<link rel=\"icon\" type=\"image/png\" href=\"/images/favicon.png\">
+  <link rel="icon" type="image/png" href="/images/favicon.png">
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -66,7 +66,7 @@
     text-decoration: none;
   }
   .nav-logo img {
-    height: 45px;
+    height: 110px;
     width: auto;
   }
   .nav-logo span {
@@ -250,13 +250,6 @@
   .hero-img:first-child { grid-row: span 2; border-radius: 120px 20px 20px 120px; }
 
   .hero-img-placeholder {
-}
-.hero-img-placeholder img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.hero-img-placeholder {
     width: 100%;
     height: 100%;
     display: flex;
@@ -268,30 +261,9 @@
     font-family: 'Cormorant Garamond', serif;
   }
 
-  .hero-img:nth-child(1) .hero-img-placeholder {
-}
-.hero-img-placeholder img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.hero-img-placeholder { background: linear-gradient(160deg, var(--sage-light), var(--sage)); color: white; }
-  .hero-img:nth-child(2) .hero-img-placeholder {
-}
-.hero-img-placeholder img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.hero-img-placeholder { background: linear-gradient(160deg, var(--blush), var(--dusty-rose)); color: white; border-radius: 20px; }
-  .hero-img:nth-child(3) .hero-img-placeholder {
-}
-.hero-img-placeholder img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.hero-img-placeholder { background: linear-gradient(160deg, var(--terracotta-light), var(--terracotta)); color: white; border-radius: 20px 20px 20px 80px; }
+  .hero-img:nth-child(1) .hero-img-placeholder { background: linear-gradient(160deg, var(--sage-light), var(--sage)); color: white; }
+  .hero-img:nth-child(2) .hero-img-placeholder { background: linear-gradient(160deg, var(--blush), var(--dusty-rose)); color: white; border-radius: 20px; }
+  .hero-img:nth-child(3) .hero-img-placeholder { background: linear-gradient(160deg, var(--terracotta-light), var(--terracotta)); color: white; border-radius: 20px 20px 20px 80px; }
 
   .hero-stat-float {
     position: absolute;
@@ -405,16 +377,7 @@
 
   .grow-chip:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
 
-  .grow-chip .chip-emoji {
-    width: 72px;
-    height: 72px;
-    border-radius: 16px;
-    overflow: hidden;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255,255,255,0.08);
-  }
+  .grow-chip .chip-emoji { font-size: 1.3rem; }
 
   .grow-note {
     text-align: center;
@@ -861,17 +824,7 @@
 
   .cal-month.active .cal-month-name { color: white; }
 
-  .cal-month-emoji {
-    width: 56px;
-    height: 56px;
-    border-radius: 14px;
-    overflow: hidden;
-    margin: 0 auto 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255,255,255,0.08);
-  }
+  .cal-month-emoji { font-size: 1.2rem; margin-bottom: 4px; }
 
   .cal-month-label {
     font-size: 0.55rem;
@@ -970,14 +923,14 @@
   }
 
   .wedding-feat-icon {
-    width: 72px;
-    height: 72px;
-    border-radius: 18px;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
     background: rgba(255,255,255,0.08);
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+    font-size: 1.1rem;
   }
 
   .weddings-contact-btn {
@@ -1031,7 +984,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255,255,255,0.06);
+    font-size: 3rem;
   }
 
   .about-img:first-child { background: linear-gradient(160deg, var(--sage-light), var(--sage)); margin-top: 40px; }
@@ -1402,32 +1355,6 @@
     .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
     .cart-drawer { width: 100%; }
   }
-
-  .chip-emoji img,
-  .cal-month-emoji img,
-  .wedding-feat-icon img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .about-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .season-inline-icon {
-    width: 22px;
-    height: 22px;
-    border-radius: 6px;
-    object-fit: cover;
-    vertical-align: -4px;
-    margin-right: 8px;
-  }
-
 </style>
 </head>
 <body>
@@ -1435,7 +1362,7 @@
 
 <!-- Navigation -->
 <nav id="navbar">
-  <a href="#" class="nav-logo"><img id="navLogoImg" src="/images/logo.png" alt="Beyond Measure Flowers"><span>Beyond Measure Flowers</span></a>
+  <a href="#" class="nav-logo"><img src="/images/logo.png" alt="Beyond Measure Flowers"><span>Beyond Measure Flowers</span></a>
   <ul class="nav-links" id="navLinks">
     <li><a href="#shop">Market</a></li>
     <li><a href="#csa">Flower CSA</a></li>
@@ -1465,22 +1392,13 @@
     <div class="hero-visual">
       <div class="hero-image-grid">
         <div class="hero-img">
-          <div class="hero-img-placeholder" id="heroImg1">
-  <img src="/images/field-grown.png" alt="Field Grown">
-  <span style="font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase">Field Grown</span>
-</div>
+          <div class="hero-img-placeholder" id="heroImg1">🌻<span style="font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase">Field Grown</span></div>
         </div>
         <div class="hero-img">
-          <div class="hero-img-placeholder" id="heroImg2">
-  <img src="/images/wedding-flowers.png" alt="Weddings">
-  <span style="font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase">Weddings</span>
-</div>
+          <div class="hero-img-placeholder" id="heroImg2">🌿<span style="font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase">Seasonal</span></div>
         </div>
         <div class="hero-img">
-          <div class="hero-img-placeholder" id="heroImg3">
-  <img src="/images/market-bouquets.png" alt="Market Bouquets">
-  <span style="font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase">Market Bouquets</span>
-</div>
+          <div class="hero-img-placeholder" id="heroImg3">💐<span style="font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase">Local</span></div>
         </div>
       </div>
       <div class="hero-stat-float">
@@ -1506,12 +1424,12 @@
     <p class="section-desc">We focus on a curated selection of hardy, vibrant varieties that thrive in Ohio summers and look stunning in every arrangement.</p>
   </div>
   <div class="grow-grid reveal">
-    <div class="grow-chip"><span class="chip-emoji"><img src="/images/icon-sunflowers.jpg" alt="Sunflowers"></span> Sunflowers</div>
-    <div class="grow-chip"><span class="chip-emoji"><img src="/images/icon-zinnias.jpg" alt="Zinnias"></span> Zinnias</div>
-    <div class="grow-chip"><span class="chip-emoji"><img src="/images/icon-flower.jpg" alt="Celosia"></span> Celosia</div>
-    <div class="grow-chip"><span class="chip-emoji"><img src="/images/icon-flower.jpg" alt="Gomphrena"></span> Gomphrena</div>
-    <div class="grow-chip"><span class="chip-emoji"><img src="/images/icon-greens.jpg" alt="Seasonal Greens"></span> Seasonal Greens</div>
-    <div class="grow-chip"><span class="chip-emoji"><img src="/images/icon-more.jpg" alt="More each season"></span> & More Each Season</div>
+    <div class="grow-chip"><span class="chip-emoji">🌻</span> Sunflowers</div>
+    <div class="grow-chip"><span class="chip-emoji">🌸</span> Zinnias</div>
+    <div class="grow-chip"><span class="chip-emoji">🔥</span> Celosia</div>
+    <div class="grow-chip"><span class="chip-emoji">💜</span> Gomphrena</div>
+    <div class="grow-chip"><span class="chip-emoji">🌿</span> Seasonal Greens</div>
+    <div class="grow-chip"><span class="chip-emoji">✨</span> & More Each Season</div>
   </div>
   <p class="grow-note reveal">We're always experimenting and adding new varieties as we grow — stay tuned!</p>
 </section>
@@ -1593,28 +1511,28 @@
   <div class="calendar-strip reveal">
     <div class="cal-month off"><div class="cal-month-emoji">❄️</div><div class="cal-month-name">Jan</div><div class="cal-month-label">Off</div></div>
     <div class="cal-month off"><div class="cal-month-emoji">❄️</div><div class="cal-month-name">Feb</div><div class="cal-month-label">Off</div></div>
-    <div class="cal-month off"><div class="cal-month-emoji"><img src="/images/icon-flower.jpg" alt="Season"></div><div class="cal-month-name">Mar</div><div class="cal-month-label">Planning</div></div>
-    <div class="cal-month off"><div class="cal-month-emoji"><img src="/images/icon-flower.jpg" alt="Season"></div><div class="cal-month-name">Apr</div><div class="cal-month-label">Planting</div></div>
-    <div class="cal-month off"><div class="cal-month-emoji"><img src="/images/icon-flower.jpg" alt="Season"></div><div class="cal-month-name">May</div><div class="cal-month-label">Growing</div></div>
-    <div class="cal-month off"><div class="cal-month-emoji"><img src="/images/icon-greens.jpg" alt="Growing"></div><div class="cal-month-name">Jun</div><div class="cal-month-label">Growing</div></div>
-    <div class="cal-month active"><div class="cal-month-emoji"><img src="/images/icon-sunflowers.jpg" alt="Harvest"></div><div class="cal-month-name">Jul</div><div class="cal-month-label">Harvest</div></div>
-    <div class="cal-month active"><div class="cal-month-emoji"><img src="/images/icon-zinnias.jpg" alt="Peak"></div><div class="cal-month-name">Aug</div><div class="cal-month-label">Peak</div></div>
-    <div class="cal-month active"><div class="cal-month-emoji"><img src="/images/icon-flower.jpg" alt="Harvest"></div><div class="cal-month-name">Sep</div><div class="cal-month-label">Harvest</div></div>
-    <div class="cal-month active"><div class="cal-month-emoji"><img src="/images/icon-flower.jpg" alt="Season"></div><div class="cal-month-name">Oct</div><div class="cal-month-label">Last Call</div></div>
-    <div class="cal-month off"><div class="cal-month-emoji"><img src="/images/icon-flower.jpg" alt="Season"></div><div class="cal-month-name">Nov</div><div class="cal-month-label">Off</div></div>
+    <div class="cal-month off"><div class="cal-month-emoji">🌱</div><div class="cal-month-name">Mar</div><div class="cal-month-label">Planning</div></div>
+    <div class="cal-month off"><div class="cal-month-emoji">🌱</div><div class="cal-month-name">Apr</div><div class="cal-month-label">Planting</div></div>
+    <div class="cal-month off"><div class="cal-month-emoji">🌱</div><div class="cal-month-name">May</div><div class="cal-month-label">Growing</div></div>
+    <div class="cal-month off"><div class="cal-month-emoji">🌿</div><div class="cal-month-name">Jun</div><div class="cal-month-label">Growing</div></div>
+    <div class="cal-month active"><div class="cal-month-emoji">🌻</div><div class="cal-month-name">Jul</div><div class="cal-month-label">Harvest</div></div>
+    <div class="cal-month active"><div class="cal-month-emoji">🌸</div><div class="cal-month-name">Aug</div><div class="cal-month-label">Peak</div></div>
+    <div class="cal-month active"><div class="cal-month-emoji">🌺</div><div class="cal-month-name">Sep</div><div class="cal-month-label">Harvest</div></div>
+    <div class="cal-month active"><div class="cal-month-emoji">🍂</div><div class="cal-month-name">Oct</div><div class="cal-month-label">Last Call</div></div>
+    <div class="cal-month off"><div class="cal-month-emoji">🍁</div><div class="cal-month-name">Nov</div><div class="cal-month-label">Off</div></div>
     <div class="cal-month off"><div class="cal-month-emoji">❄️</div><div class="cal-month-name">Dec</div><div class="cal-month-label">Off</div></div>
   </div>
   <div class="seasonal-details reveal">
     <div class="seasonal-detail-card">
-      <h4><img class="season-inline-icon" src="/images/icon-sunflowers.jpg" alt="July"> July — Early Harvest</h4>
+      <h4>🌻 July — Early Harvest</h4>
       <p>The first sunflowers and zinnias arrive! Early celosia and gomphrena start filling out the field with bold color.</p>
     </div>
     <div class="seasonal-detail-card">
-      <h4><img class="season-inline-icon" src="/images/icon-zinnias.jpg" alt="August"> August — Peak Season</h4>
+      <h4>🌸 August — Peak Season</h4>
       <p>The field is bursting. Zinnias are at their most prolific, dahlias may make an appearance, and bouquets are lush and full.</p>
     </div>
     <div class="seasonal-detail-card">
-      <h4><img class="season-inline-icon" src="/images/icon-flower.jpg" alt="September"> September — Rich Tones</h4>
+      <h4>🌺 September — Rich Tones</h4>
       <p>Warm autumn colors take over — deep reds, oranges, and burgundies. Celosia and gomphrena shine this time of year.</p>
     </div>
     <div class="seasonal-detail-card">
@@ -1632,7 +1550,7 @@
     <p class="weddings-desc" id="weddingsDesc">We take on a limited number of weddings and events each season, giving every celebration our full attention. Our farm-grown flowers bring a natural, seasonal beauty that can't be replicated.</p>
     <div class="weddings-features">
       <div class="wedding-feat">
-        <div class="wedding-feat-icon"><img src="/images/icon-bouquet.jpg" alt="Bouquet"></div>
+        <div class="wedding-feat-icon">💐</div>
         Bridal & bridesmaid bouquets
       </div>
       <div class="wedding-feat">
@@ -1640,7 +1558,7 @@
         Ceremony & reception florals
       </div>
       <div class="wedding-feat">
-        <div class="wedding-feat-icon"><img src="/images/icon-greens.jpg" alt="Greenery"></div>
+        <div class="wedding-feat-icon">🌿</div>
         Seasonal, farm-fresh blooms
       </div>
     </div>
@@ -1653,7 +1571,7 @@
 <section id="about">
   <div class="about-layout">
     <div class="about-images reveal">
-      <div class="about-img" id="aboutImg1"><img src="/images/about-photo.jpg" alt="About Beyond Measure Flowers"></div>
+      <div class="about-img" id="aboutImg1">🌻</div>
       <div class="about-img" id="aboutImg2">🌾</div>
     </div>
     <div class="about-text reveal">
@@ -1692,7 +1610,7 @@
 <footer>
   <div class="footer-content">
     <div class="footer-brand">
-      <a href="#" class="nav-logo"><img id="footerLogoImg" src="/images/logo.png" alt="Beyond Measure Flowers" style="height:110px"><span>Beyond Measure Flowers</span></a>
+      <a href="#" class="nav-logo"><img src="/images/logo.png" alt="Beyond Measure Flowers" style="filter:brightness(0) invert(1);height:100px"><span>Beyond Measure Flowers</span></a>
       <p>A small Ohio flower farm, growing seasonal blooms with love. July through first frost.</p>
     </div>
     <div>
@@ -1786,10 +1704,6 @@ async function loadData(){
       for(var id in map){var el=document.getElementById(id);if(el&&contentData[map[id]])el.textContent=contentData[map[id]];}
       if(contentData.contact_email){
         document.querySelectorAll('a[href*="mailto:"]').forEach(function(a){a.href='mailto:'+contentData.contact_email;});
-      }
-      if(contentData.logo_image){
-        var l1=document.getElementById('navLogoImg'); if(l1) l1.src=contentData.logo_image;
-        var l2=document.getElementById('footerLogoImg'); if(l2) l2.src=contentData.logo_image;
       }
       var imgMap={'heroImg1':'hero_image_1','heroImg2':'hero_image_2','heroImg3':'hero_image_3','aboutImg1':'about_image_1','aboutImg2':'about_image_2'};
       for(var imgId in imgMap){
