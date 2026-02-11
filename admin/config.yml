@@ -46,6 +46,7 @@ collections:
         fields:
           - { name: "hero_description", label: "Hero Description", widget: "text" }
           - { name: "season_banner", label: "Season Banner Text", widget: "string" }
+          - { name: "logo_image", label: "Logo Image", widget: "image", required: false }
           - { name: "hero_image_1", label: "Hero Photo - Left (tall, vertical)", widget: "image", required: false }
           - { name: "hero_image_2", label: "Hero Photo - Top Right", widget: "image", required: false }
           - { name: "hero_image_3", label: "Hero Photo - Bottom Right", widget: "image", required: false }
