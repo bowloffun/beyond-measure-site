@@ -59,12 +59,21 @@
   }
 
   .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+  .nav-logo img {
+    height: 45px;
+    width: auto;
+  }
+  .nav-logo span {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.6rem;
     font-weight: 500;
     color: var(--charcoal);
     letter-spacing: 0.02em;
-    text-decoration: none;
   }
 
   .nav-links {
@@ -474,6 +483,7 @@
     cursor: pointer;
     font-size: 1.2rem;
     transition: all 0.3s;
+    text-decoration: none;
   }
 
   .product-btn:hover { background: var(--sage-dark); transform: scale(1.1); }
@@ -1036,7 +1046,8 @@
     gap: 60px;
   }
 
-  .footer-brand .nav-logo { color: white; font-size: 1.8rem; display: block; margin-bottom: 16px; }
+  .footer-brand .nav-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+  .footer-brand .nav-logo span { color: white; font-size: 1.8rem; }
 
   .footer-brand p {
     color: rgba(255,255,255,0.5);
@@ -1350,7 +1361,7 @@
 
 <!-- Navigation -->
 <nav id="navbar">
-  <a href="#" class="nav-logo">Beyond Measure Flowers</a>
+  <a href="#" class="nav-logo"><img src="/images/logo.png" alt="Beyond Measure Flowers"><span>Beyond Measure Flowers</span></a>
   <ul class="nav-links" id="navLinks">
     <li><a href="#shop">Market</a></li>
     <li><a href="#csa">Flower CSA</a></li>
@@ -1369,7 +1380,7 @@
   <div class="hero-bg-pattern"></div>
   <div class="hero-content">
     <div class="hero-text">
-      <div class="hero-badge">An Ohio Flower Farm</div>
+      <div class="hero-badge">Year Three — Ohio Flower Farm</div>
       <h1>Flowers Grown with <em>Love</em> & Intention</h1>
       <p class="hero-desc" id="heroDesc">Zinnias, sunflowers, celosia, and more — cultivated with care in the heart of Ohio. Fresh-cut from our field to your hands, July through first frost.</p>
       <div class="hero-actions">
@@ -1380,13 +1391,13 @@
     <div class="hero-visual">
       <div class="hero-image-grid">
         <div class="hero-img">
-          <div class="hero-img-placeholder">🌻<span style="font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase">Field Grown</span></div>
+          <div class="hero-img-placeholder" id="heroImg1">🌻<span style="font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase">Field Grown</span></div>
         </div>
         <div class="hero-img">
-          <div class="hero-img-placeholder">🌿<span style="font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase">Seasonal</span></div>
+          <div class="hero-img-placeholder" id="heroImg2">🌿<span style="font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase">Seasonal</span></div>
         </div>
         <div class="hero-img">
-          <div class="hero-img-placeholder">💐<span style="font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase">Local</span></div>
+          <div class="hero-img-placeholder" id="heroImg3">💐<span style="font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase">Local</span></div>
         </div>
       </div>
       <div class="hero-stat-float">
@@ -1559,8 +1570,8 @@
 <section id="about">
   <div class="about-layout">
     <div class="about-images reveal">
-      <div class="about-img">🌻</div>
-      <div class="about-img">🌾</div>
+      <div class="about-img" id="aboutImg1">🌻</div>
+      <div class="about-img" id="aboutImg2">🌾</div>
     </div>
     <div class="about-text reveal">
       <div class="section-tag">Our Story</div>
@@ -1598,7 +1609,7 @@
 <footer>
   <div class="footer-content">
     <div class="footer-brand">
-      <a href="#" class="nav-logo">Beyond Measure</a>
+      <a href="#" class="nav-logo"><img src="/images/logo.png" alt="Beyond Measure Flowers" style="filter:brightness(0) invert(1);height:40px"><span>Beyond Measure Flowers</span></a>
       <p>A small Ohio flower farm, growing seasonal blooms with love. July through first frost.</p>
     </div>
     <div>
@@ -1693,6 +1704,13 @@ async function loadData(){
       if(contentData.contact_email){
         document.querySelectorAll('a[href*="mailto:"]').forEach(function(a){a.href='mailto:'+contentData.contact_email;});
       }
+      var imgMap={'heroImg1':'hero_image_1','heroImg2':'hero_image_2','heroImg3':'hero_image_3','aboutImg1':'about_image_1','aboutImg2':'about_image_2'};
+      for(var imgId in imgMap){
+        if(contentData[imgMap[imgId]]){
+          var el=document.getElementById(imgId);
+          if(el){el.innerHTML='';el.style.backgroundImage='url('+contentData[imgMap[imgId]]+')';el.style.backgroundSize='cover';el.style.backgroundPosition='center';}
+        }
+      }
     }
     if(varData&&varData.varieties){
       var gg=document.getElementById('growGrid');
@@ -1706,7 +1724,9 @@ function renderProducts(){
   var grid=document.getElementById('shopGrid');if(!grid)return;
   grid.innerHTML=products.map(function(p,i){
     var bg=productBgs[i%productBgs.length];
-    return '<div class="product-card reveal"><div class="product-image"><div class="product-image-inner" style="background:'+bg+'">'+p.emoji+'</div><div class="product-tag">'+p.tag+'</div></div><div class="product-info"><div class="product-name">'+p.name+'</div><div class="product-desc">'+p.description+'</div><div class="product-footer"><div class="product-price">$'+p.price+'</div><button class="product-btn" onclick="addProductToCart('+i+')" aria-label="Add to cart">+</button></div></div></div>';
+    var imgContent = p.image ? '<img src="'+p.image+'" alt="'+p.name+'" style="width:100%;height:100%;object-fit:cover;">' : p.emoji;
+    var btnHtml = p.square_link ? '<a href="'+p.square_link+'" target="_blank" class="product-btn" aria-label="Buy now" title="Buy now">→</a>' : '<button class="product-btn" disabled aria-label="Coming soon" title="Coming soon" style="opacity:0.4;cursor:default">+</button>';
+    return '<div class="product-card reveal"><div class="product-image"><div class="product-image-inner" style="background:'+bg+'">'+imgContent+'</div><div class="product-tag">'+p.tag+'</div></div><div class="product-info"><div class="product-name">'+p.name+'</div><div class="product-desc">'+p.description+'</div><div class="product-footer"><div class="product-price">$'+p.price+'</div>'+btnHtml+'</div></div></div>';
   }).join('');
 }
 
@@ -1722,7 +1742,7 @@ function renderCsaDates(){
   if(selectedCsaDates.length===0){sm.innerHTML='<li class="csa-summary-empty">No dates selected yet \u2014 pick 4 above!</li>';}
   else{sm.innerHTML=selectedCsaDates.map(function(id){var d=csaDates.find(function(x){return x.id===id;});return '<li>'+d.day+', '+d.date+'</li>';}).join('');}
   var btn=document.getElementById('csaCheckoutBtn');
-  if(selectedCsaDates.length===4){btn.classList.add('active');btn.textContent='Add CSA to Cart \u2014 $'+csaPrice;}
+  if(selectedCsaDates.length===4){btn.classList.add('active');btn.textContent='Checkout with Square \u2014 $'+csaPrice;}
   else{btn.classList.remove('active');var r=4-selectedCsaDates.length;btn.textContent='Select '+r+' more date'+(r!==1?'s':'')+' to continue';}
 }
 
@@ -1736,8 +1756,9 @@ function toggleCsaDate(id){
 function csaCheckout(){
   if(selectedCsaDates.length!==4)return;
   var labels=selectedCsaDates.map(function(id){var d=csaDates.find(function(x){return x.id===id;});return d.day+' '+d.date;});
-  cart.push({id:'csa-'+Date.now(),name:'Summer Flower CSA',price:csaPrice,emoji:'\ud83c\udf38',bg:'linear-gradient(160deg, #C5D4B8, #8B9E7E)',qty:1,detail:'4 pickups: '+labels.join(', '),isCSA:true});
-  renderCart();updateNavCart();openCart();showToast('\ud83c\udf38 CSA added to cart with your selected dates!');
+  fetch('https://formspree.io/f/mbdadqow',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:'New CSA Date Selection',dates:labels.join(', '),message:'A customer selected these 4 CSA pickup dates: '+labels.join(', ')})}).catch(function(){});
+  window.open('https://square.link/u/7TIjdiEn','_blank');
+  showToast('\ud83c\udf38 Redirecting to checkout!');
 }
 
 function addProductToCart(index){

@@ -21,8 +21,10 @@ collections:
               - { name: "name", label: "Product Name", widget: "string" }
               - { name: "description", label: "Description", widget: "text" }
               - { name: "price", label: "Price (number only, no $)", widget: "string" }
-              - { name: "emoji", label: "Emoji Icon", widget: "string" }
+              - { name: "emoji", label: "Emoji Icon (fallback if no photo)", widget: "string" }
+              - { name: "image", label: "Product Photo", widget: "image", required: false }
               - { name: "tag", label: "Tag (e.g. Signature, Popular)", widget: "string" }
+              - { name: "square_link", label: "Square Checkout Link", widget: "string", required: false }
 
       - name: "csa"
         label: "CSA Settings"
@@ -44,6 +46,11 @@ collections:
         fields:
           - { name: "hero_description", label: "Hero Description", widget: "text" }
           - { name: "season_banner", label: "Season Banner Text", widget: "string" }
+          - { name: "hero_image_1", label: "Hero Photo - Left (tall, vertical)", widget: "image", required: false }
+          - { name: "hero_image_2", label: "Hero Photo - Top Right", widget: "image", required: false }
+          - { name: "hero_image_3", label: "Hero Photo - Bottom Right", widget: "image", required: false }
+          - { name: "about_image_1", label: "About Photo - Left", widget: "image", required: false }
+          - { name: "about_image_2", label: "About Photo - Right", widget: "image", required: false }
           - { name: "market_note", label: "Farmers Market Info", widget: "text" }
           - { name: "about_paragraph_1", label: "About - Paragraph 1", widget: "text" }
           - { name: "about_paragraph_2", label: "About - Paragraph 2", widget: "text" }
@@ -61,3 +68,4 @@ collections:
             fields:
               - { name: "name", label: "Variety Name", widget: "string" }
               - { name: "emoji", label: "Emoji", widget: "string" }
+              - { name: "image", label: "Variety Photo", widget: "image", required: false }
