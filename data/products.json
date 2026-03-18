@@ -14,7 +14,7 @@
       "id": "market-mini",
       "name": "Market Mini Bouquet",
       "description": "A sweet, hand-tied mini bouquet with the best of what's blooming this week.",
-      "price": "XX",
+      "price": "25",
       "emoji": "💐",
       "tag": "Market Favorite",
       "square_link": "https://square.link/u/bFjHiYCM"
@@ -23,7 +23,7 @@
       "id": "flower-bunch",
       "name": "Single Variety Bunch",
       "description": "A generous bunch of one variety — zinnias, sunflowers, or whatever is at its peak.",
-      "price": "XX",
+      "price": "10",
       "emoji": "🌻",
       "tag": "Mix & Match",
       "square_link": ""
@@ -32,7 +32,7 @@
       "id": "full-bouquet",
       "name": "Full Bouquet",
       "description": "A lush, hand-tied bouquet showcasing the best of the season. Perfect for gifting or treating yourself.",
-      "price": "XX",
+      "price": "35",
       "emoji": "🌺",
       "tag": "Premium",
       "square_link": "https://square.link/u/4q5YImX6"
