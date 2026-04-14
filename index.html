@@ -393,7 +393,7 @@
 
   .shop-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 32px;
     max-width: 1200px;
     margin: 0 auto;
@@ -1730,7 +1730,7 @@ function renderProducts(){
   grid.innerHTML=products.map(function(p,i){
     var bg=productBgs[i%productBgs.length];
     var imgContent = p.image ? '<img src="'+p.image+'" alt="'+p.name+'" style="width:100%;height:100%;object-fit:cover;">' : p.emoji;
-    var btnHtml = '<button class="product-btn" onclick="addProductToCart('+i+')" aria-label="Add to cart" title="Add to cart">+</button>';
+    var btnHtml = p.square_link ? '<a href="'+p.square_link+'" target="_blank" class="product-btn" aria-label="Buy now" title="Buy now">→</a>' : '<button class="product-btn" disabled aria-label="Coming soon" title="Coming soon" style="opacity:0.4;cursor:default">+</button>';
     return '<div class="product-card reveal"><div class="product-image"><div class="product-image-inner" style="background:'+bg+'">'+imgContent+'</div><div class="product-tag">'+p.tag+'</div></div><div class="product-info"><div class="product-name">'+p.name+'</div><div class="product-desc">'+p.description+'</div><div class="product-footer"><div class="product-price">$'+p.price+'</div>'+btnHtml+'</div></div></div>';
   }).join('');
 }
@@ -1747,7 +1747,7 @@ function renderCsaDates(){
   if(selectedCsaDates.length===0){sm.innerHTML='<li class="csa-summary-empty">No dates selected yet \u2014 pick 4 above!</li>';}
   else{sm.innerHTML=selectedCsaDates.map(function(id){var d=csaDates.find(function(x){return x.id===id;});return '<li>'+d.day+', '+d.date+'</li>';}).join('');}
   var btn=document.getElementById('csaCheckoutBtn');
-  if(selectedCsaDates.length===4){btn.classList.add('active');btn.textContent='Add CSA to Cart \u2014 $'+csaPrice;}
+  if(selectedCsaDates.length===4){btn.classList.add('active');btn.textContent='Checkout with Square \u2014 $'+csaPrice;}
   else{btn.classList.remove('active');var r=4-selectedCsaDates.length;btn.textContent='Select '+r+' more date'+(r!==1?'s':'')+' to continue';}
 }
 
@@ -1761,11 +1761,9 @@ function toggleCsaDate(id){
 function csaCheckout(){
   if(selectedCsaDates.length!==4)return;
   var labels=selectedCsaDates.map(function(id){var d=csaDates.find(function(x){return x.id===id;});return d.day+' '+d.date;});
-  var existing=cart.find(function(item){return item.isCSA;});
-  if(existing){showToast('CSA already in your cart!');openCart();return;}
-  cart.push({id:'csa-'+Date.now(),name:'Summer Flower CSA',price:csaPrice,emoji:'\ud83c\udf38',bg:'linear-gradient(160deg, #C5D4B8, #8B9E7E)',qty:1,detail:'4 pickups: '+labels.join(', '),isCSA:true});
-  renderCart();updateNavCart();openCart();
-  showToast('\ud83c\udf38 CSA added to cart!');
+  fetch('https://formspree.io/f/mbdadqow',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:'New CSA Date Selection',dates:labels.join(', '),message:'A customer selected these 4 CSA pickup dates: '+labels.join(', ')})}).catch(function(){});
+  window.open('https://square.link/u/7TIjdiEn','_blank');
+  showToast('\ud83c\udf38 Redirecting to checkout!');
 }
 
 function addProductToCart(index){
