@@ -4,17 +4,16 @@
       "id": "cup-of-blooms",
       "name": "Cup of Blooms",
       "description": "Our signature! A cheerful paper cup filled with a petite bouquet — perfect for carrying home from the market.",
-      "price": "13",
+      "price": "XX",
       "emoji": "🥤🌸",
       "tag": "Signature",
-      "square_link": "https://square.link/u/4gW9Jp1D",
-      "image": "/images/cup-of-blooms.jpg"
+      "square_link": "https://square.link/u/4gW9Jp1D"
     },
     {
       "id": "market-mini",
       "name": "Market Mini Bouquet",
       "description": "A sweet, hand-tied mini bouquet with the best of what's blooming this week.",
-      "price": "25",
+      "price": "XX",
       "emoji": "💐",
       "tag": "Market Favorite",
       "square_link": "https://square.link/u/bFjHiYCM"
@@ -22,17 +21,17 @@
     {
       "id": "flower-bunch",
       "name": "Single Variety Bunch",
-      "description": "A generous bunch of one variety — zinnias, sunflowers, or whatever is at its peak.",
-      "price": "10",
+      "description": "A generous bunch of one variety — choose your flower at checkout. Price varies by variety.",
+      "price": "XX",
       "emoji": "🌻",
       "tag": "Mix & Match",
-      "square_link": ""
+      "square_link": "https://square.link/u/DW2zbMcs"
     },
     {
       "id": "full-bouquet",
       "name": "Full Bouquet",
       "description": "A lush, hand-tied bouquet showcasing the best of the season. Perfect for gifting or treating yourself.",
-      "price": "35",
+      "price": "XX",
       "emoji": "🌺",
       "tag": "Premium",
       "square_link": "https://square.link/u/4q5YImX6"
