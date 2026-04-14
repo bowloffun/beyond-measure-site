@@ -4,10 +4,11 @@
       "id": "cup-of-blooms",
       "name": "Cup of Blooms",
       "description": "Our signature! A cheerful paper cup filled with a petite bouquet — perfect for carrying home from the market.",
-      "price": "XX",
+      "price": "13",
       "emoji": "🥤🌸",
       "tag": "Signature",
-      "square_link": "https://square.link/u/4gW9Jp1D"
+      "square_link": "https://square.link/u/4gW9Jp1D",
+      "image": "/images/cup-of-blooms.jpg"
     },
     {
       "id": "market-mini",
