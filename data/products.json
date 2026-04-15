@@ -18,7 +18,7 @@
       "emoji": "💐",
       "tag": "Market Favorite",
       "square_link": "https://square.link/u/bFjHiYCM",
-      "image": "/images/photo-jul-08-2025-2-47-21-pm.jpg"
+      "image": ""
     },
     {
       "id": "flower-bunch",
@@ -36,7 +36,8 @@
       "price": "35",
       "emoji": "🌺",
       "tag": "Premium",
-      "square_link": "https://square.link/u/4q5YImX6"
+      "square_link": "https://square.link/u/4q5YImX6",
+      "image": "/images/photo-jul-08-2025-2-47-21-pm.jpg"
     }
   ]
 }
