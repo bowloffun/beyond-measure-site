@@ -1,21 +1,81 @@
 {
-  "price": "140",
+  "price": "130",
   "description": "Pick 4 pickup dates over our 8-week season and receive a gorgeous, hand-tied bouquet each time. Choose the days that work for your schedule.",
   "dates": [
-    { "day": "Friday", "date": "July 17, 2026" },
-    { "day": "Saturday", "date": "July 18, 2026" },
-    { "day": "Tuesday", "date": "July 21, 2026" },
-    { "day": "Saturday", "date": "July 25, 2026" },
-    { "day": "Tuesday", "date": "July 28, 2026" },
-    { "day": "Friday", "date": "August 1, 2026" },
-    { "day": "Tuesday", "date": "August 4, 2026" },
-    { "day": "Saturday", "date": "August 8, 2026" },
-    { "day": "Tuesday", "date": "August 11, 2026" },
-    { "day": "Friday", "date": "August 14, 2026" },
-    { "day": "Tuesday", "date": "August 18, 2026" },
-    { "day": "Saturday", "date": "August 22, 2026" },
-    { "day": "Tuesday", "date": "August 25, 2026" },
-    { "day": "Friday", "date": "August 28, 2026" },
-    { "day": "Saturday", "date": "August 29, 2026" }
+    {
+      "day": "Friday",
+      "date": "July 17, 2026",
+      "spots": 4
+    },
+    {
+      "day": "Saturday",
+      "date": "July 18, 2026",
+      "spots": 4
+    },
+    {
+      "day": "Tuesday",
+      "date": "July 21, 2026",
+      "spots": 4
+    },
+    {
+      "day": "Saturday",
+      "date": "July 25, 2026",
+      "spots": 4
+    },
+    {
+      "day": "Tuesday",
+      "date": "July 28, 2026",
+      "spots": 4
+    },
+    {
+      "day": "Friday",
+      "date": "August 1, 2026",
+      "spots": 4
+    },
+    {
+      "day": "Tuesday",
+      "date": "August 4, 2026",
+      "spots": 4
+    },
+    {
+      "day": "Saturday",
+      "date": "August 8, 2026",
+      "spots": 4
+    },
+    {
+      "day": "Tuesday",
+      "date": "August 11, 2026",
+      "spots": 4
+    },
+    {
+      "day": "Friday",
+      "date": "August 14, 2026",
+      "spots": 4
+    },
+    {
+      "day": "Tuesday",
+      "date": "August 18, 2026",
+      "spots": 4
+    },
+    {
+      "day": "Saturday",
+      "date": "August 22, 2026",
+      "spots": 4
+    },
+    {
+      "day": "Tuesday",
+      "date": "August 25, 2026",
+      "spots": 4
+    },
+    {
+      "day": "Friday",
+      "date": "August 28, 2026",
+      "spots": 4
+    },
+    {
+      "day": "Saturday",
+      "date": "August 29, 2026",
+      "spots": 4
+    }
   ]
 }
