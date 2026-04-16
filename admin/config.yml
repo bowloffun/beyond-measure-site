@@ -19,12 +19,18 @@ collections:
             fields:
               - { name: "id", label: "ID (don't change)", widget: "string" }
               - { name: "name", label: "Product Name", widget: "string" }
-              - { name: "description", label: "Description", widget: "text" }
+              - { name: "description", label: "Short Description (shown on card)", widget: "text" }
+              - { name: "long_description", label: "Full Description (shown in popup)", widget: "text", required: false }
               - { name: "price", label: "Price (number only, no $)", widget: "string" }
               - { name: "emoji", label: "Emoji Icon (fallback if no photo)", widget: "string" }
               - { name: "image", label: "Product Photo", widget: "image", required: false }
               - { name: "tag", label: "Tag (e.g. Signature, Popular)", widget: "string" }
-              - { name: "square_link", label: "Square Checkout Link", widget: "string", required: false }
+          - name: "bunch_varieties"
+            label: "Single Variety Bunch Options"
+            widget: "list"
+            fields:
+              - { name: "name", label: "Variety Name", widget: "string" }
+              - { name: "price", label: "Price (number only, no $)", widget: "number" }
 
       - name: "csa"
         label: "CSA Settings"
@@ -38,7 +44,6 @@ collections:
             fields:
               - { name: "day", label: "Day of Week (e.g. Tuesday, Friday, Saturday)", widget: "string" }
               - { name: "date", label: "Full Date (e.g. July 7, 2026)", widget: "string" }
-              - { name: "spots", label: "Number of Spots Available", widget: "number" }
 
       - name: "content"
         label: "Site Content"

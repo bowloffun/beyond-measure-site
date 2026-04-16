@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Beyond Measure Flowers — Farm Fresh Blooms from Ohio</title>
 <link rel="icon" type="image/png" href="/images/favicon.png">
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>if(window.location.pathname.indexOf('/admin')===0){var s=document.createElement('script');s.src='https://identity.netlify.com/v1/netlify-identity-widget.js';document.head.appendChild(s);}</script>
 <script src="https://js.stripe.com/v3/"></script>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -1356,6 +1356,161 @@
     .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
     .cart-drawer { width: 100%; }
   }
+  /* ===== PRODUCT MODAL ===== */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 2500;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    display: flex; align-items: center; justify-content: center; padding: 20px;
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+  .modal-content {
+    background: white; border-radius: 28px; max-width: 800px; width: 100%;
+    max-height: 90vh; overflow-y: auto; position: relative;
+    transform: scale(0.9); transition: transform 0.3s;
+  }
+  .modal-overlay.open .modal-content { transform: scale(1); }
+  .modal-close {
+    position: absolute; top: 16px; right: 16px; width: 40px; height: 40px;
+    border-radius: 50%; background: rgba(0,0,0,0.06); border: none; cursor: pointer;
+    font-size: 1.3rem; display: flex; align-items: center; justify-content: center;
+    z-index: 2; transition: background 0.3s; color: var(--text);
+  }
+  .modal-close:hover { background: rgba(0,0,0,0.12); }
+  .modal-body { display: grid; grid-template-columns: 1fr 1fr; }
+  .modal-image {
+    aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+    font-size: 5rem; border-radius: 28px 0 0 28px; overflow: hidden;
+  }
+  .modal-image img { width: 100%; height: 100%; object-fit: cover; }
+  .modal-details { padding: 40px; display: flex; flex-direction: column; justify-content: center; }
+  .modal-tag {
+    display: inline-block; font-size: 0.7rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--sage-dark); font-weight: 500;
+    background: rgba(139,158,126,0.1); padding: 5px 14px; border-radius: 50px;
+    margin-bottom: 12px; width: fit-content;
+  }
+  .modal-name {
+    font-family: 'Cormorant Garamond', serif; font-size: 2rem;
+    font-weight: 400; color: var(--charcoal); margin-bottom: 12px;
+  }
+  .modal-desc {
+    font-size: 0.95rem; color: var(--text-light); line-height: 1.8;
+    font-weight: 300; margin-bottom: 20px;
+  }
+  .modal-price {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.8rem;
+    font-weight: 600; color: var(--terracotta); margin-bottom: 20px;
+  }
+  .modal-variety-select {
+    width: 100%; padding: 14px 18px; border: 2px solid #e8e4de; border-radius: 14px;
+    font-family: 'Jost', sans-serif; font-size: 0.95rem; background: white;
+    outline: none; margin-bottom: 16px; cursor: pointer; appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B6B6B' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 16px center;
+  }
+  .modal-variety-select:focus { border-color: var(--sage); }
+  .modal-add-btn {
+    width: 100%; padding: 16px; background: var(--terracotta); color: white;
+    border: none; border-radius: 50px; font-family: 'Jost', sans-serif;
+    font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase;
+    font-weight: 500; cursor: pointer; transition: all 0.3s;
+  }
+  .modal-add-btn:hover { background: #a8664a; transform: translateY(-2px); }
+
+  /* ===== CART PAGE ===== */
+  .cart-page {
+    display: none; position: fixed; inset: 0; background: var(--cream);
+    z-index: 2000; overflow-y: auto;
+  }
+  .cart-page.open { display: block; }
+  .cart-page-inner {
+    max-width: 900px; margin: 0 auto; padding: 100px 40px 60px;
+  }
+  .cart-page-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 40px;
+  }
+  .cart-page-title {
+    font-family: 'Cormorant Garamond', serif; font-size: 2.5rem;
+    font-weight: 300; color: var(--charcoal);
+  }
+  .cart-page-close {
+    background: none; border: none; font-size: 0.85rem; cursor: pointer;
+    color: var(--text-light); text-decoration: underline; font-family: 'Jost', sans-serif;
+  }
+  .cart-page-items { margin-bottom: 40px; }
+  .cart-page-item {
+    display: flex; gap: 24px; padding: 24px 0; border-bottom: 1px solid #e8e4de;
+    align-items: center;
+  }
+  .cart-page-item-img {
+    width: 100px; height: 100px; border-radius: 16px; display: flex;
+    align-items: center; justify-content: center; font-size: 2.5rem; flex-shrink: 0;
+    overflow: hidden;
+  }
+  .cart-page-item-img img { width: 100%; height: 100%; object-fit: cover; }
+  .cart-page-item-info { flex: 1; }
+  .cart-page-item-name {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.3rem;
+    font-weight: 500; color: var(--charcoal); margin-bottom: 4px;
+  }
+  .cart-page-item-detail { font-size: 0.8rem; color: var(--text-light); font-weight: 300; }
+  .cart-page-item-price {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.3rem;
+    font-weight: 600; color: var(--terracotta); min-width: 70px; text-align: right;
+  }
+  .cart-page-item-qty {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .cart-page-qty-btn {
+    width: 32px; height: 32px; border-radius: 50%; border: 1px solid #ddd;
+    background: white; cursor: pointer; display: flex; align-items: center;
+    justify-content: center; font-size: 1rem; transition: all 0.2s;
+  }
+  .cart-page-qty-btn:hover { background: #f5f5f5; }
+  .cart-page-item-remove {
+    background: none; border: none; color: var(--text-light); font-size: 0.8rem;
+    cursor: pointer; text-decoration: underline; font-family: 'Jost', sans-serif;
+    margin-top: 8px;
+  }
+  .cart-page-summary {
+    background: white; border-radius: 20px; padding: 32px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+  }
+  .cart-page-total {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #e8e4de;
+  }
+  .cart-page-total-label { font-size: 1rem; color: var(--text-light); }
+  .cart-page-total-price {
+    font-family: 'Cormorant Garamond', serif; font-size: 2rem;
+    font-weight: 600; color: var(--charcoal);
+  }
+  .cart-page-checkout-btn {
+    width: 100%; padding: 18px; background: var(--terracotta); color: white;
+    border: none; border-radius: 50px; font-family: 'Jost', sans-serif;
+    font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase;
+    font-weight: 500; cursor: pointer; transition: all 0.3s;
+  }
+  .cart-page-checkout-btn:hover { background: #a8664a; transform: translateY(-2px); }
+  .cart-page-continue {
+    display: block; text-align: center; margin-top: 16px; color: var(--text-light);
+    font-size: 0.85rem; cursor: pointer; text-decoration: underline;
+    background: none; border: none; font-family: 'Jost', sans-serif; width: 100%;
+  }
+  .cart-page-empty {
+    text-align: center; padding: 80px 20px; color: var(--text-light);
+  }
+  .cart-page-empty span { font-size: 4rem; display: block; margin-bottom: 16px; }
+
+  @media (max-width: 768px) {
+    .modal-body { grid-template-columns: 1fr; }
+    .modal-image { border-radius: 28px 28px 0 0; aspect-ratio: 4/3; }
+    .modal-details { padding: 24px; }
+    .cart-page-inner { padding: 80px 20px 40px; }
+    .cart-page-item { flex-wrap: wrap; }
+  }
+
 </style>
 </head>
 <body>
@@ -1667,12 +1822,44 @@
       <span class="cart-total-label">Subtotal</span>
       <span class="cart-total-price" id="cartTotal">$0</span>
     </div>
-    <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+    <button class="checkout-btn" onclick="openCartPage()">View Cart & Checkout</button>
   </div>
 </div>
 
 <!-- Toast -->
 <div class="toast" id="toast"></div>
+
+<!-- Product Modal -->
+<div class="modal-overlay" id="productModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-body">
+      <div class="modal-image" id="modalImage"></div>
+      <div class="modal-details">
+        <div class="modal-tag" id="modalTag"></div>
+        <div class="modal-name" id="modalName"></div>
+        <div class="modal-desc" id="modalDesc"></div>
+        <div id="modalVarietyWrap" style="display:none">
+          <select class="modal-variety-select" id="modalVariety" onchange="updateModalPrice()">
+          </select>
+        </div>
+        <div class="modal-price" id="modalPrice"></div>
+        <button class="modal-add-btn" id="modalAddBtn" onclick="addFromModal()">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cart Page -->
+<div class="cart-page" id="cartPage">
+  <div class="cart-page-inner">
+    <div class="cart-page-header">
+      <div class="cart-page-title">Your Cart</div>
+      <button class="cart-page-close" onclick="closeCartPage()">Continue Shopping</button>
+    </div>
+    <div id="cartPageContent"></div>
+  </div>
+</div>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 var productBgs = [
@@ -1694,7 +1881,7 @@ async function loadData(){
       fetch('/data/varieties.json').then(function(r){return r.json();}).catch(function(){return null;})
     ]);
     var prodData=res[0], csaData=res[1], contentData=res[2], varData=res[3];
-    if(prodData&&prodData.products){products=prodData.products;renderProducts();}
+    if(prodData&&prodData.products){products=prodData.products;if(prodData.bunch_varieties)bunchVarieties=prodData.bunch_varieties;renderProducts();}
     if(csaData){
       csaDates=csaData.dates.map(function(d,i){d.id='date-'+i;return d;});
       csaPrice=csaData.price;
@@ -1730,14 +1917,88 @@ async function loadData(){
   document.querySelectorAll('.reveal').forEach(function(el){observer.observe(el);});
 }
 
+var currentModalProduct=null;
+var bunchVarieties=[
+  {name:'Sunflowers',price:15},
+  {name:'Celosia',price:12},
+  {name:'Zinnia',price:10}
+];
+
 function renderProducts(){
   var grid=document.getElementById('shopGrid');if(!grid)return;
   grid.innerHTML=products.map(function(p,i){
     var bg=productBgs[i%productBgs.length];
-    var imgContent = p.image ? '<img src="'+p.image+'" alt="'+p.name+'" style="width:100%;height:100%;object-fit:cover;">' : p.emoji;
-    var btnHtml = '<button class="product-btn" onclick="addProductToCart('+i+')" aria-label="Add to cart" title="Add to cart">+</button>';
-    return '<div class="product-card reveal"><div class="product-image"><div class="product-image-inner" style="background:'+bg+'">'+imgContent+'</div><div class="product-tag">'+p.tag+'</div></div><div class="product-info"><div class="product-name">'+p.name+'</div><div class="product-desc">'+p.description+'</div><div class="product-footer"><div class="product-price">$'+p.price+'</div>'+btnHtml+'</div></div></div>';
+    var imgContent=p.image?'<img src="'+p.image+'" alt="'+p.name+'" style="width:100%;height:100%;object-fit:cover;">':p.emoji;
+    var displayPrice=p.id==='flower-bunch'?'From $'+bunchVarieties[bunchVarieties.length-1].price:'$'+p.price;
+    return '<div class="product-card reveal" onclick="openModal('+i+')"><div class="product-image"><div class="product-image-inner" style="background:'+bg+'">'+imgContent+'</div><div class="product-tag">'+p.tag+'</div></div><div class="product-info"><div class="product-name">'+p.name+'</div><div class="product-desc">'+p.description+'</div><div class="product-footer"><div class="product-price">'+displayPrice+'</div><button class="product-btn" onclick="event.stopPropagation();quickAdd('+i+')" aria-label="Add to cart" title="Add to cart">+</button></div></div></div>';
   }).join('');
+}
+
+function quickAdd(index){
+  var p=products[index];if(!p)return;
+  if(p.id==='flower-bunch'){openModal(index);return;}
+  addProductToCart(index);
+}
+
+function openModal(index){
+  var p=products[index];if(!p)return;
+  currentModalProduct=index;
+  var bg=productBgs[index%productBgs.length];
+  var imgEl=document.getElementById('modalImage');
+  if(p.image){
+    imgEl.innerHTML='<img src="'+p.image+'" alt="'+p.name+'">';
+  }else{
+    imgEl.innerHTML=p.emoji;
+  }
+  imgEl.style.background=bg;
+  document.getElementById('modalTag').textContent=p.tag;
+  document.getElementById('modalName').textContent=p.name;
+  document.getElementById('modalDesc').textContent=p.long_description||p.description;
+  var varWrap=document.getElementById('modalVarietyWrap');
+  if(p.id==='flower-bunch'){
+    varWrap.style.display='block';
+    var sel=document.getElementById('modalVariety');
+    sel.innerHTML=bunchVarieties.map(function(v){return '<option value="'+v.price+'" data-name="'+v.name+'">'+v.name+' \u2014 $'+v.price+'</option>';}).join('');
+    updateModalPrice();
+  }else{
+    varWrap.style.display='none';
+    document.getElementById('modalPrice').textContent='$'+p.price;
+  }
+  document.getElementById('productModal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeModal(){
+  document.getElementById('productModal').classList.remove('open');
+  document.body.style.overflow='';
+  currentModalProduct=null;
+}
+
+function updateModalPrice(){
+  var sel=document.getElementById('modalVariety');
+  document.getElementById('modalPrice').textContent='$'+sel.value;
+}
+
+function addFromModal(){
+  if(currentModalProduct===null)return;
+  var p=products[currentModalProduct];
+  var bg=productBgs[currentModalProduct%productBgs.length];
+  if(p.id==='flower-bunch'){
+    var sel=document.getElementById('modalVariety');
+    var varietyName=sel.options[sel.selectedIndex].getAttribute('data-name');
+    var varietyPrice=sel.value;
+    var itemId=p.id+'-'+varietyName.toLowerCase();
+    var existing=cart.find(function(item){return item.id===itemId;});
+    if(existing){existing.qty++;}
+    else{cart.push({id:itemId,name:varietyName+' Bunch',price:varietyPrice,emoji:p.emoji,image:p.image||'',bg:bg,qty:1});}
+  }else{
+    var existing=cart.find(function(item){return item.id===p.id;});
+    if(existing){existing.qty++;}
+    else{cart.push({id:p.id,name:p.name,price:p.price,emoji:p.emoji,image:p.image||'',bg:bg,qty:1});}
+  }
+  renderCart();renderCartPage();updateNavCart();
+  closeModal();
+  showToast(p.emoji+' Added to cart!');
 }
 
 function renderCsaDates(){
@@ -1791,10 +2052,34 @@ function renderCart(){
   if(cart.length===0){c.innerHTML='<div class="cart-empty"><span>\ud83c\udf38</span>Your cart is empty.<br>Add some beautiful blooms!</div>';f.style.display='none';return;}
   f.style.display='block';
   c.innerHTML=cart.map(function(item){
-    return '<div class="cart-item"><div class="cart-item-img" style="background:'+item.bg+'">'+item.emoji+'</div><div class="cart-item-info"><div class="cart-item-name">'+item.name+'</div><div class="cart-item-price">$'+item.price+'</div>'+(item.detail?'<div class="cart-item-detail">'+item.detail+'</div>':'')+(!item.isCSA?'<div class="cart-item-qty"><button class="qty-btn" onclick="updateQty(\x27'+item.id+'\x27,-1)">\u2212</button><span>'+item.qty+'</span><button class="qty-btn" onclick="updateQty(\x27'+item.id+'\x27,1)">+</button></div>':'<div style="margin-top:4px"><button class="qty-btn" onclick="removeFromCart(\x27'+item.id+'\x27)" style="width:auto;padding:0 10px;border-radius:8px;font-size:.7rem">Remove</button></div>')+'</div></div>';
+    return '<div class="cart-item"><div class="cart-item-img" style="background:'+item.bg+'">'+(item.image?'<img src="'+item.image+'" style="width:100%;height:100%;object-fit:cover;border-radius:12px">':item.emoji)+'</div><div class="cart-item-info"><div class="cart-item-name">'+item.name+'</div><div class="cart-item-price">$'+item.price+'</div>'+(item.detail?'<div class="cart-item-detail">'+item.detail+'</div>':'')+(!item.isCSA?'<div class="cart-item-qty"><button class="qty-btn" onclick="updateQty(\x27'+item.id+'\x27,-1)">\u2212</button><span>'+item.qty+'</span><button class="qty-btn" onclick="updateQty(\x27'+item.id+'\x27,1)">+</button></div>':'<div style="margin-top:4px"><button class="qty-btn" onclick="removeFromCart(\x27'+item.id+'\x27)" style="width:auto;padding:0 10px;border-radius:8px;font-size:.7rem">Remove</button></div>')+'</div></div>';
   }).join('');
-  var real=cart.every(function(item){return item.price!=='XX';});
-  document.getElementById('cartTotal').textContent=real?'$'+cart.reduce(function(s,i){return s+Number(i.price)*i.qty;},0):'$\u2014';
+  var total=cart.reduce(function(s,i){return s+Number(i.price)*i.qty;},0);
+  document.getElementById('cartTotal').textContent='$'+total;
+}
+
+function renderCartPage(){
+  var container=document.getElementById('cartPageContent');
+  if(cart.length===0){
+    container.innerHTML='<div class="cart-page-empty"><span>\ud83c\udf38</span>Your cart is empty.<br><button class="cart-page-continue" onclick="closeCartPage()">Start Shopping</button></div>';
+    return;
+  }
+  var total=cart.reduce(function(s,i){return s+Number(i.price)*i.qty;},0);
+  container.innerHTML='<div class="cart-page-items">'+cart.map(function(item){
+    return '<div class="cart-page-item"><div class="cart-page-item-img" style="background:'+item.bg+'">'+(item.image?'<img src="'+item.image+'" alt="'+item.name+'">':item.emoji)+'</div><div class="cart-page-item-info"><div class="cart-page-item-name">'+item.name+'</div>'+(item.detail?'<div class="cart-page-item-detail">'+item.detail+'</div>':'')+(!item.isCSA?'<div class="cart-page-item-qty"><button class="cart-page-qty-btn" onclick="updateQty(\x27'+item.id+'\x27,-1);renderCartPage()">\u2212</button><span>'+item.qty+'</span><button class="cart-page-qty-btn" onclick="updateQty(\x27'+item.id+'\x27,1);renderCartPage()">+</button></div>':'')+'<button class="cart-page-item-remove" onclick="removeFromCart(\x27'+item.id+'\x27);renderCartPage()">Remove</button></div><div class="cart-page-item-price">$'+(Number(item.price)*item.qty)+'</div></div>';
+  }).join('')+'</div><div class="cart-page-summary"><div class="cart-page-total"><span class="cart-page-total-label">Total</span><span class="cart-page-total-price">$'+total+'</span></div><button class="cart-page-checkout-btn" onclick="checkout()">Proceed to Checkout</button><button class="cart-page-continue" onclick="closeCartPage()">Continue Shopping</button></div>';
+}
+
+function openCartPage(){
+  closeCart();
+  renderCartPage();
+  document.getElementById('cartPage').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeCartPage(){
+  document.getElementById('cartPage').classList.remove('open');
+  document.body.style.overflow='';
 }
 function updateNavCart(){var count=cart.reduce(function(s,i){return s+i.qty;},0);var link=document.querySelector('.nav-cta');if(link)link.textContent='Cart ('+count+')';}
 function openCart(){document.getElementById('cartOverlay').classList.add('open');document.getElementById('cartDrawer').classList.add('open');}

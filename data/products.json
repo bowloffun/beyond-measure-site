@@ -4,37 +4,42 @@
       "id": "cup-of-blooms",
       "name": "Cup of Blooms",
       "description": "Our signature! A cheerful paper cup filled with a petite bouquet — perfect for carrying home from the market.",
+      "long_description": "",
       "price": "13",
       "emoji": "🥤🌸",
-      "tag": "Signature",
-      "square_link": ""
+      "tag": "Signature"
     },
     {
       "id": "market-mini",
       "name": "Market Mini Bouquet",
       "description": "A sweet, hand-tied mini bouquet with the best of what's blooming this week.",
+      "long_description": "",
       "price": "25",
       "emoji": "💐",
-      "tag": "Market Favorite",
-      "square_link": ""
+      "tag": "Market Favorite"
     },
     {
       "id": "flower-bunch",
       "name": "Single Variety Bunch",
       "description": "A generous bunch of one variety — choose your flower at checkout. Price varies by variety.",
+      "long_description": "",
       "price": "10",
       "emoji": "🌻",
-      "tag": "Mix & Match",
-      "square_link": ""
+      "tag": "Mix & Match"
     },
     {
       "id": "full-bouquet",
       "name": "Full Bouquet",
       "description": "A lush, hand-tied bouquet showcasing the best of the season. Perfect for gifting or treating yourself.",
+      "long_description": "",
       "price": "35",
       "emoji": "🌺",
-      "tag": "Premium",
-      "square_link": ""
+      "tag": "Premium"
     }
+  ],
+  "bunch_varieties": [
+    { "name": "Sunflowers", "price": 15 },
+    { "name": "Celosia", "price": 12 },
+    { "name": "Zinnia", "price": 10 }
   ]
 }
