@@ -7,8 +7,7 @@
       "price": "13",
       "emoji": "🥤🌸",
       "tag": "Signature",
-      "square_link": "https://square.link/u/4gW9Jp1D",
-      "image": "/images/cup-of-blooms.jpg"
+      "square_link": ""
     },
     {
       "id": "market-mini",
@@ -17,18 +16,16 @@
       "price": "25",
       "emoji": "💐",
       "tag": "Market Favorite",
-      "square_link": "https://square.link/u/bFjHiYCM",
-      "image": "/images/photo-aug-01-2025-11-31-17-am.jpg"
+      "square_link": ""
     },
     {
       "id": "flower-bunch",
       "name": "Single Variety Bunch",
       "description": "A generous bunch of one variety — choose your flower at checkout. Price varies by variety.",
-      "price": "10+",
+      "price": "10",
       "emoji": "🌻",
       "tag": "Mix & Match",
-      "square_link": "https://square.link/u/DW2zbMcs",
-      "image": "/images/img_6469.jpg"
+      "square_link": ""
     },
     {
       "id": "full-bouquet",
@@ -37,8 +34,7 @@
       "price": "35",
       "emoji": "🌺",
       "tag": "Premium",
-      "square_link": "https://square.link/u/4q5YImX6",
-      "image": "/images/photo-jul-08-2025-2-47-21-pm.jpg"
+      "square_link": ""
     }
   ]
 }
