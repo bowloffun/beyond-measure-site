@@ -1504,24 +1504,59 @@
   .cart-page-empty span { font-size: 4rem; display: block; margin-bottom: 16px; }
 
   .cart-page-pickup {
-    margin-bottom: 24px;
+    margin-bottom: 24px; background: white; border-radius: 20px;
+    padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.04);
   }
   .cart-page-pickup-title {
     font-family: 'Cormorant Garamond', serif; font-size: 1.3rem;
-    font-weight: 400; color: var(--charcoal); margin-bottom: 12px;
+    font-weight: 400; color: var(--charcoal); margin-bottom: 8px;
   }
   .cart-page-pickup-subtitle {
-    font-size: 0.85rem; color: var(--text-light); font-weight: 300; margin-bottom: 16px;
+    font-size: 0.85rem; color: var(--text-light); font-weight: 300;
+    line-height: 1.7; margin-bottom: 20px;
   }
-  .cart-page-pickup-btns { display: flex; gap: 12px; }
-  .cart-page-pickup-btn {
-    flex: 1; padding: 16px; border: 2px solid #e8e4de; border-radius: 14px;
-    background: white; cursor: pointer; font-family: 'Jost', sans-serif;
-    font-size: 0.95rem; font-weight: 400; color: var(--charcoal);
-    transition: all 0.25s; text-align: center;
+  .pickup-selected-date {
+    background: rgba(139,158,126,0.08); border-radius: 14px; padding: 14px 20px;
+    font-size: 0.95rem; color: var(--charcoal); margin-bottom: 20px;
+    display: flex; align-items: center;
   }
-  .cart-page-pickup-btn:hover { border-color: var(--sage); background: rgba(139,158,126,0.04); }
-  .cart-page-pickup-btn.selected { border-color: var(--sage); background: rgba(139,158,126,0.08); font-weight: 500; }
+  .pickup-cal-wrap {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
+  }
+  .pickup-cal-month {
+    background: var(--cream); border-radius: 16px; padding: 16px;
+  }
+  .pickup-cal-month-header {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.1rem;
+    font-weight: 500; color: var(--charcoal); text-align: center;
+    margin-bottom: 12px;
+  }
+  .pickup-cal-days {
+    display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px;
+    margin-bottom: 4px;
+  }
+  .pickup-cal-dayname {
+    text-align: center; font-size: 0.7rem; font-weight: 500;
+    color: var(--text-light); letter-spacing: 0.05em; padding: 4px 0;
+  }
+  .pickup-cal-grid {
+    display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px;
+  }
+  .pickup-cal-cell {
+    text-align: center; padding: 8px 4px; font-size: 0.85rem;
+    border-radius: 8px; color: #ccc; min-height: 34px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .pickup-cal-cell.available {
+    color: var(--charcoal); background: rgba(139,158,126,0.12);
+    cursor: pointer; font-weight: 500; transition: all 0.2s;
+  }
+  .pickup-cal-cell.available:hover {
+    background: rgba(139,158,126,0.25);
+  }
+  .pickup-cal-cell.selected {
+    background: var(--sage) !important; color: white !important;
+  }
 
   @media (max-width: 768px) {
     .modal-body { grid-template-columns: 1fr; }
@@ -1529,6 +1564,7 @@
     .modal-details { padding: 24px; }
     .cart-page-inner { padding: 80px 20px 40px; }
     .cart-page-item { flex-wrap: wrap; }
+    .pickup-cal-wrap { grid-template-columns: 1fr; }
   }
 
 </style>
@@ -2082,7 +2118,42 @@ function renderCart(){
   document.getElementById('cartTotal').textContent='$'+total;
 }
 
-var selectedPickupDay='';
+var selectedPickupDate='';
+var pickupDates=["2026-07-17","2026-07-18","2026-07-21","2026-07-24","2026-07-25","2026-07-28","2026-07-31","2026-08-01","2026-08-04","2026-08-07","2026-08-08","2026-08-11","2026-08-14","2026-08-15","2026-08-18","2026-08-21","2026-08-22","2026-08-25","2026-08-28","2026-08-29","2026-09-01","2026-09-04","2026-09-05","2026-09-08","2026-09-11","2026-09-12","2026-09-15","2026-09-18","2026-09-19","2026-09-22","2026-09-25","2026-09-26","2026-09-29","2026-10-02","2026-10-03","2026-10-06","2026-10-09","2026-10-10","2026-10-13","2026-10-16","2026-10-17"];
+
+function buildCalendar(year,month){
+  var monthNames=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var dayNames=['Su','Mo','Tu','We','Th','Fr','Sa'];
+  var first=new Date(year,month,1);
+  var last=new Date(year,month+1,0);
+  var startDay=first.getDay();
+  var html='<div class="pickup-cal-month"><div class="pickup-cal-month-header">'+monthNames[month]+' '+year+'</div>';
+  html+='<div class="pickup-cal-days">'+dayNames.map(function(d){return '<div class="pickup-cal-dayname">'+d+'</div>';}).join('')+'</div>';
+  html+='<div class="pickup-cal-grid">';
+  for(var i=0;i<startDay;i++) html+='<div class="pickup-cal-cell"></div>';
+  for(var d=1;d<=last.getDate();d++){
+    var dateStr=year+'-'+String(month+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+    var isAvail=pickupDates.indexOf(dateStr)>-1;
+    var isSel=selectedPickupDate===dateStr;
+    var cls='pickup-cal-cell';
+    if(isAvail) cls+=' available';
+    if(isSel) cls+=' selected';
+    if(isAvail){
+      html+='<div class="'+cls+'" onclick="selectPickupDate(\''+dateStr+'\')">'+d+'</div>';
+    }else{
+      html+='<div class="'+cls+'">'+d+'</div>';
+    }
+  }
+  html+='</div></div>';
+  return html;
+}
+
+function formatPickupDate(dateStr){
+  var d=new Date(dateStr+'T12:00:00');
+  var days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  return days[d.getDay()]+', '+months[d.getMonth()]+' '+d.getDate();
+}
 
 function renderCartPage(){
   var container=document.getElementById('cartPageContent');
@@ -2094,18 +2165,22 @@ function renderCartPage(){
   var total=cart.reduce(function(s,i){return s+Number(i.price)*i.qty;},0);
   var pickupHtml='';
   if(hasNonCSA){
-    pickupHtml='<div class="cart-page-pickup"><div class="cart-page-pickup-title">Choose Your Pickup Day</div><div class="cart-page-pickup-subtitle">Select a day to pick up your order from our porch in Lebanon. Address and times provided after purchase.</div><div class="cart-page-pickup-btns"><button class="cart-page-pickup-btn'+(selectedPickupDay==='Tuesday'?' selected':'')+'" onclick="selectPickupDay(\'Tuesday\')">Tuesday</button><button class="cart-page-pickup-btn'+(selectedPickupDay==='Friday'?' selected':'')+'" onclick="selectPickupDay(\'Friday\')">Friday</button><button class="cart-page-pickup-btn'+(selectedPickupDay==='Saturday'?' selected':'')+'" onclick="selectPickupDay(\'Saturday\')">Saturday</button></div></div>';
+    pickupHtml='<div class="cart-page-pickup"><div class="cart-page-pickup-title">Choose Your Pickup Date</div><div class="cart-page-pickup-subtitle">We\u2019re a small flower farm with limited pickup availability. Please select an available date below \u2014 highlighted dates are open for porch pickup in Lebanon. Address and times provided after purchase.</div>';
+    if(selectedPickupDate){
+      pickupHtml+='<div class="pickup-selected-date">\ud83c\udf38 Picking up: <strong>'+formatPickupDate(selectedPickupDate)+'</strong> <button onclick="selectedPickupDate=\'\';renderCartPage()" style="background:none;border:none;color:var(--terracotta);cursor:pointer;font-family:Jost,sans-serif;text-decoration:underline;font-size:0.85rem;margin-left:8px">Change</button></div>';
+    }
+    pickupHtml+='<div class="pickup-cal-wrap">'+buildCalendar(2026,6)+buildCalendar(2026,7)+buildCalendar(2026,8)+buildCalendar(2026,9)+'</div></div>';
   }
-  var checkoutDisabled=hasNonCSA&&!selectedPickupDay;
-  var checkoutBtnText=checkoutDisabled?'Select a pickup day to continue':'Proceed to Checkout';
+  var checkoutDisabled=hasNonCSA&&!selectedPickupDate;
+  var checkoutBtnText=checkoutDisabled?'Select a pickup date to continue':'Proceed to Checkout';
   var checkoutBtnStyle=checkoutDisabled?' style="opacity:0.5;pointer-events:none"':'';
   container.innerHTML='<div class="cart-page-items">'+cart.map(function(item){
     return '<div class="cart-page-item"><div class="cart-page-item-img" style="background:'+item.bg+'">'+(item.image?'<img src="'+item.image+'" alt="'+item.name+'">':item.emoji)+'</div><div class="cart-page-item-info"><div class="cart-page-item-name">'+item.name+'</div>'+(item.detail?'<div class="cart-page-item-detail">'+item.detail+'</div>':'')+(!item.isCSA?'<div class="cart-page-item-qty"><button class="cart-page-qty-btn" onclick="updateQty(\x27'+item.id+'\x27,-1);renderCartPage()">\u2212</button><span>'+item.qty+'</span><button class="cart-page-qty-btn" onclick="updateQty(\x27'+item.id+'\x27,1);renderCartPage()">+</button></div>':'')+'<button class="cart-page-item-remove" onclick="removeFromCart(\x27'+item.id+'\x27);renderCartPage()">Remove</button></div><div class="cart-page-item-price">$'+(Number(item.price)*item.qty)+'</div></div>';
   }).join('')+'</div>'+pickupHtml+'<div class="cart-page-summary"><div class="cart-page-total"><span class="cart-page-total-label">Total</span><span class="cart-page-total-price">$'+total+'</span></div><button class="cart-page-checkout-btn" onclick="checkout()"'+checkoutBtnStyle+'>'+checkoutBtnText+'</button><button class="cart-page-continue" onclick="closeCartPage()">Continue Shopping</button></div>';
 }
 
-function selectPickupDay(day){
-  selectedPickupDay=day;
+function selectPickupDate(dateStr){
+  selectedPickupDate=dateStr;
   renderCartPage();
 }
 
@@ -2128,7 +2203,8 @@ var stripeClient=Stripe('pk_live_51TMqTr3hxRhWGrehFdFkYQKi0Yhof819rW80HxYR4qTOSN
 async function checkout(){
   if(cart.length===0)return;
   var hasNonCSA=cart.some(function(item){return !item.isCSA;});
-  if(hasNonCSA&&!selectedPickupDay){showToast('Please select a pickup day.');return;}
+  if(hasNonCSA&&!selectedPickupDate){showToast('Please select a pickup date.');return;}
+  var pickupFormatted=selectedPickupDate?formatPickupDate(selectedPickupDate):'';
   var checkoutBtn=document.querySelector('.cart-page-checkout-btn');
   if(checkoutBtn){checkoutBtn.textContent='Processing...';checkoutBtn.disabled=true;}
 
@@ -2148,13 +2224,13 @@ async function checkout(){
     return line;
   }).join(', ');
   var total=cart.reduce(function(s,i){return s+Number(i.price)*i.qty;},0);
-  fetch('https://formspree.io/f/mbdadqow',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:'New Order - '+(customerName||'Website Customer'),name:customerName,email:customerEmail,_replyto:customerEmail||undefined,order:orderDesc,total:'$'+total,pickup_day:selectedPickupDay,csa_dates:csaDates,message:(customerName||'A customer')+' ordered: '+orderDesc+' | Total: $'+total+(selectedPickupDay?' | Pickup: '+selectedPickupDay:'')+(csaDates?' | CSA Dates: '+csaDates:'')})}).catch(function(){});
+  fetch('https://formspree.io/f/mbdadqow',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:'New Order - '+(customerName||'Website Customer'),name:customerName,email:customerEmail,_replyto:customerEmail||undefined,order:orderDesc,total:'$'+total,pickup_date:pickupFormatted,csa_dates:csaDates,message:(customerName||'A customer')+' ordered: '+orderDesc+' | Total: $'+total+(pickupFormatted?' | Pickup: '+pickupFormatted:'')+(csaDates?' | CSA Dates: '+csaDates:'')})}).catch(function(){});
 
   try{
     var response=await fetch('/.netlify/functions/create-checkout',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({items:items,customerEmail:customerEmail,customerName:customerName,csaDates:csaDates,pickupDay:selectedPickupDay})
+      body:JSON.stringify({items:items,customerEmail:customerEmail,customerName:customerName,csaDates:csaDates,pickupDay:pickupFormatted})
     });
     var data=await response.json();
     if(data.error){
