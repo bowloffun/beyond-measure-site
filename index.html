@@ -1503,6 +1503,26 @@
   }
   .cart-page-empty span { font-size: 4rem; display: block; margin-bottom: 16px; }
 
+  .cart-page-pickup {
+    margin-bottom: 24px;
+  }
+  .cart-page-pickup-title {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.3rem;
+    font-weight: 400; color: var(--charcoal); margin-bottom: 12px;
+  }
+  .cart-page-pickup-subtitle {
+    font-size: 0.85rem; color: var(--text-light); font-weight: 300; margin-bottom: 16px;
+  }
+  .cart-page-pickup-btns { display: flex; gap: 12px; }
+  .cart-page-pickup-btn {
+    flex: 1; padding: 16px; border: 2px solid #e8e4de; border-radius: 14px;
+    background: white; cursor: pointer; font-family: 'Jost', sans-serif;
+    font-size: 0.95rem; font-weight: 400; color: var(--charcoal);
+    transition: all 0.25s; text-align: center;
+  }
+  .cart-page-pickup-btn:hover { border-color: var(--sage); background: rgba(139,158,126,0.04); }
+  .cart-page-pickup-btn.selected { border-color: var(--sage); background: rgba(139,158,126,0.08); font-weight: 500; }
+
   @media (max-width: 768px) {
     .modal-body { grid-template-columns: 1fr; }
     .modal-image { border-radius: 28px 28px 0 0; aspect-ratio: 4/3; }
@@ -1871,6 +1891,9 @@ var productBgs = [
   'linear-gradient(160deg, #C4A265, #A8864A)'
 ];
 var products=[], csaDates=[], csaPrice='XX', selectedCsaDates=[], cart=[];
+try{var savedCart=localStorage.getItem('bmf_cart');if(savedCart)cart=JSON.parse(savedCart);}catch(e){}
+
+function saveCart(){try{localStorage.setItem('bmf_cart',JSON.stringify(cart));}catch(e){}}
 
 async function loadData(){
   try {
@@ -2048,6 +2071,7 @@ function addProductToCart(index){
 function removeFromCart(id){cart=cart.filter(function(item){return item.id!==id;});renderCart();updateNavCart();}
 function updateQty(id,delta){var item=cart.find(function(i){return i.id===id;});if(!item)return;item.qty+=delta;if(item.qty<=0)return removeFromCart(id);renderCart();updateNavCart();}
 function renderCart(){
+  saveCart();
   var c=document.getElementById('cartItems'),f=document.getElementById('cartFooter');
   if(cart.length===0){c.innerHTML='<div class="cart-empty"><span>\ud83c\udf38</span>Your cart is empty.<br>Add some beautiful blooms!</div>';f.style.display='none';return;}
   f.style.display='block';
@@ -2058,16 +2082,31 @@ function renderCart(){
   document.getElementById('cartTotal').textContent='$'+total;
 }
 
+var selectedPickupDay='';
+
 function renderCartPage(){
   var container=document.getElementById('cartPageContent');
   if(cart.length===0){
     container.innerHTML='<div class="cart-page-empty"><span>\ud83c\udf38</span>Your cart is empty.<br><button class="cart-page-continue" onclick="closeCartPage()">Start Shopping</button></div>';
     return;
   }
+  var hasNonCSA=cart.some(function(item){return !item.isCSA;});
   var total=cart.reduce(function(s,i){return s+Number(i.price)*i.qty;},0);
+  var pickupHtml='';
+  if(hasNonCSA){
+    pickupHtml='<div class="cart-page-pickup"><div class="cart-page-pickup-title">Choose Your Pickup Day</div><div class="cart-page-pickup-subtitle">Select a day to pick up your order from our porch in Lebanon. Address and times provided after purchase.</div><div class="cart-page-pickup-btns"><button class="cart-page-pickup-btn'+(selectedPickupDay==='Tuesday'?' selected':'')+'" onclick="selectPickupDay(\'Tuesday\')">Tuesday</button><button class="cart-page-pickup-btn'+(selectedPickupDay==='Friday'?' selected':'')+'" onclick="selectPickupDay(\'Friday\')">Friday</button><button class="cart-page-pickup-btn'+(selectedPickupDay==='Saturday'?' selected':'')+'" onclick="selectPickupDay(\'Saturday\')">Saturday</button></div></div>';
+  }
+  var checkoutDisabled=hasNonCSA&&!selectedPickupDay;
+  var checkoutBtnText=checkoutDisabled?'Select a pickup day to continue':'Proceed to Checkout';
+  var checkoutBtnStyle=checkoutDisabled?' style="opacity:0.5;pointer-events:none"':'';
   container.innerHTML='<div class="cart-page-items">'+cart.map(function(item){
     return '<div class="cart-page-item"><div class="cart-page-item-img" style="background:'+item.bg+'">'+(item.image?'<img src="'+item.image+'" alt="'+item.name+'">':item.emoji)+'</div><div class="cart-page-item-info"><div class="cart-page-item-name">'+item.name+'</div>'+(item.detail?'<div class="cart-page-item-detail">'+item.detail+'</div>':'')+(!item.isCSA?'<div class="cart-page-item-qty"><button class="cart-page-qty-btn" onclick="updateQty(\x27'+item.id+'\x27,-1);renderCartPage()">\u2212</button><span>'+item.qty+'</span><button class="cart-page-qty-btn" onclick="updateQty(\x27'+item.id+'\x27,1);renderCartPage()">+</button></div>':'')+'<button class="cart-page-item-remove" onclick="removeFromCart(\x27'+item.id+'\x27);renderCartPage()">Remove</button></div><div class="cart-page-item-price">$'+(Number(item.price)*item.qty)+'</div></div>';
-  }).join('')+'</div><div class="cart-page-summary"><div class="cart-page-total"><span class="cart-page-total-label">Total</span><span class="cart-page-total-price">$'+total+'</span></div><button class="cart-page-checkout-btn" onclick="checkout()">Proceed to Checkout</button><button class="cart-page-continue" onclick="closeCartPage()">Continue Shopping</button></div>';
+  }).join('')+'</div>'+pickupHtml+'<div class="cart-page-summary"><div class="cart-page-total"><span class="cart-page-total-label">Total</span><span class="cart-page-total-price">$'+total+'</span></div><button class="cart-page-checkout-btn" onclick="checkout()"'+checkoutBtnStyle+'>'+checkoutBtnText+'</button><button class="cart-page-continue" onclick="closeCartPage()">Continue Shopping</button></div>';
+}
+
+function selectPickupDay(day){
+  selectedPickupDay=day;
+  renderCartPage();
 }
 
 function openCartPage(){
@@ -2088,9 +2127,10 @@ var stripeClient=Stripe('pk_live_51TMqTr3hxRhWGrehFdFkYQKi0Yhof819rW80HxYR4qTOSN
 
 async function checkout(){
   if(cart.length===0)return;
-  var checkoutBtn=document.querySelector('.checkout-btn');
-  checkoutBtn.textContent='Processing...';
-  checkoutBtn.disabled=true;
+  var hasNonCSA=cart.some(function(item){return !item.isCSA;});
+  if(hasNonCSA&&!selectedPickupDay){showToast('Please select a pickup day.');return;}
+  var checkoutBtn=document.querySelector('.cart-page-checkout-btn');
+  if(checkoutBtn){checkoutBtn.textContent='Processing...';checkoutBtn.disabled=true;}
 
   var csaItem=cart.find(function(item){return item.isCSA;});
   var customerEmail=csaItem?csaItem.customerEmail:'';
@@ -2108,13 +2148,13 @@ async function checkout(){
     return line;
   }).join(', ');
   var total=cart.reduce(function(s,i){return s+Number(i.price)*i.qty;},0);
-  fetch('https://formspree.io/f/mbdadqow',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:'New Order - '+(customerName||'Website Customer'),name:customerName,email:customerEmail,_replyto:customerEmail||undefined,order:orderDesc,total:'$'+total,csa_dates:csaDates,message:(customerName||'A customer')+' ordered: '+orderDesc+' | Total: $'+total+(csaDates?' | CSA Dates: '+csaDates:'')})}).catch(function(){});
+  fetch('https://formspree.io/f/mbdadqow',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:'New Order - '+(customerName||'Website Customer'),name:customerName,email:customerEmail,_replyto:customerEmail||undefined,order:orderDesc,total:'$'+total,pickup_day:selectedPickupDay,csa_dates:csaDates,message:(customerName||'A customer')+' ordered: '+orderDesc+' | Total: $'+total+(selectedPickupDay?' | Pickup: '+selectedPickupDay:'')+(csaDates?' | CSA Dates: '+csaDates:'')})}).catch(function(){});
 
   try{
     var response=await fetch('/.netlify/functions/create-checkout',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({items:items,customerEmail:customerEmail,customerName:customerName,csaDates:csaDates})
+      body:JSON.stringify({items:items,customerEmail:customerEmail,customerName:customerName,csaDates:csaDates,pickupDay:selectedPickupDay})
     });
     var data=await response.json();
     if(data.error){
@@ -2140,12 +2180,14 @@ var observer=new IntersectionObserver(function(entries){entries.forEach(function
 document.querySelectorAll('.reveal').forEach(function(el){observer.observe(el);});
 if(window.netlifyIdentity){window.netlifyIdentity.on("init",function(user){if(!user){window.netlifyIdentity.on("login",function(){document.location.href="/admin/";});}});}
 loadData();
+updateNavCart();
 // Check for payment result
 var urlParams=new URLSearchParams(window.location.search);
 if(urlParams.get('payment')==='success'){
   showToast('\u2705 Payment successful! Thank you for your order!');
   window.history.replaceState({},'',window.location.pathname);
   cart=[];
+  saveCart();
 }else if(urlParams.get('payment')==='cancelled'){
   showToast('Payment cancelled. Your cart is still saved.');
   window.history.replaceState({},'',window.location.pathname);

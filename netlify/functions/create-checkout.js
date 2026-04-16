@@ -6,7 +6,7 @@ exports.handler = async (event) => {
   }
 
   try {
-    const { items, customerEmail, customerName, csaDates } = JSON.parse(event.body);
+    const { items, customerEmail, customerName, csaDates, pickupDay } = JSON.parse(event.body);
 
     const line_items = items.map(item => ({
       price_data: {
@@ -30,22 +30,8 @@ exports.handler = async (event) => {
       metadata: {
         customer_name: customerName || '',
         csa_dates: csaDates || '',
+        pickup_day: pickupDay || '',
       },
-      shipping_address_collection: undefined,
-      custom_fields: [
-        {
-          key: 'pickup_day',
-          label: { type: 'custom', custom: 'Preferred Pickup Day' },
-          type: 'dropdown',
-          dropdown: {
-            options: [
-              { label: 'Tuesday', value: 'tuesday' },
-              { label: 'Friday', value: 'friday' },
-              { label: 'Saturday', value: 'saturday' },
-            ],
-          },
-        },
-      ],
     };
 
     const session = await stripe.checkout.sessions.create(sessionConfig);
