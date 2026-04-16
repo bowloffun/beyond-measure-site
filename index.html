@@ -2257,6 +2257,7 @@ document.querySelectorAll('.reveal').forEach(function(el){observer.observe(el);}
 if(window.netlifyIdentity){window.netlifyIdentity.on("init",function(user){if(!user){window.netlifyIdentity.on("login",function(){document.location.href="/admin/";});}});}
 loadData();
 updateNavCart();
+renderCart();
 // Check for payment result
 var urlParams=new URLSearchParams(window.location.search);
 if(urlParams.get('payment')==='success'){
