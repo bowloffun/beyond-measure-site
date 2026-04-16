@@ -7,7 +7,8 @@
       "long_description": "",
       "price": "13",
       "emoji": "🥤🌸",
-      "tag": "Signature"
+      "tag": "Signature",
+      "image": "/images/cup-of-blooms.jpg"
     },
     {
       "id": "market-mini",
@@ -16,7 +17,8 @@
       "long_description": "",
       "price": "25",
       "emoji": "💐",
-      "tag": "Market Favorite"
+      "tag": "Market Favorite",
+      "image": "/images/photo-aug-01-2025-11-31-17-am.jpg"
     },
     {
       "id": "flower-bunch",
@@ -25,7 +27,8 @@
       "long_description": "",
       "price": "10",
       "emoji": "🌻",
-      "tag": "Mix & Match"
+      "tag": "Mix & Match",
+      "image": "/images/img_6469.jpg"
     },
     {
       "id": "full-bouquet",
@@ -34,12 +37,22 @@
       "long_description": "",
       "price": "35",
       "emoji": "🌺",
-      "tag": "Premium"
+      "tag": "Premium",
+      "image": "/images/photo-jul-08-2025-2-47-21-pm.jpg"
     }
   ],
   "bunch_varieties": [
-    { "name": "Sunflowers", "price": 15 },
-    { "name": "Celosia", "price": 12 },
-    { "name": "Zinnia", "price": 10 }
+    {
+      "name": "Sunflowers",
+      "price": 15
+    },
+    {
+      "name": "Celosia",
+      "price": 12
+    },
+    {
+      "name": "Zinnia",
+      "price": 10
+    }
   ]
 }
