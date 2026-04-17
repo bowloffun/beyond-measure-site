@@ -36,7 +36,7 @@
     background: var(--cream);
     color: var(--text);
     overflow-x: hidden;
-    line-height: 1.6;
+    line-height: 1.7;
   }
 
   /* ===== NAVIGATION ===== */
@@ -86,7 +86,7 @@
   }
 
   .nav-links a {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-weight: 400;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -204,7 +204,7 @@
   h1 em { font-style: italic; color: var(--terracotta); font-weight: 400; }
 
   .hero-desc {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     color: var(--text-light);
     max-width: 480px;
     line-height: 1.75;
@@ -221,7 +221,7 @@
     padding: 16px 36px;
     border-radius: 50px;
     font-family: 'Jost', sans-serif;
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     font-weight: 500;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -342,7 +342,7 @@
   h2 em { font-style: italic; color: var(--terracotta); font-weight: 400; }
 
   .section-desc {
-    font-size: 1rem;
+    font-size: 1.15rem;
     color: var(--text-light);
     max-width: 560px;
     margin: 16px auto 0;
@@ -367,9 +367,9 @@
     align-items: center;
     gap: 10px;
     background: white;
-    padding: 14px 28px;
+    padding: 16px 30px;
     border-radius: 50px;
-    font-size: 0.95rem;
+    font-size: 1.05rem;
     font-weight: 400;
     color: var(--charcoal);
     box-shadow: 0 2px 12px rgba(0,0,0,0.04);
@@ -383,7 +383,7 @@
   .grow-note {
     text-align: center;
     margin-top: 32px;
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: var(--text-light);
     font-style: italic;
     font-weight: 300;
@@ -449,18 +449,19 @@
 
   .product-name {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     font-weight: 500;
     color: var(--charcoal);
     margin-bottom: 6px;
   }
 
+  
   .product-desc {
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     color: var(--text-light);
     margin-bottom: 16px;
     font-weight: 300;
-    line-height: 1.6;
+    line-height: 1.7;
   }
 
   .product-footer { display: flex; justify-content: space-between; align-items: center; }
@@ -513,14 +514,26 @@
   }
 
   .market-note p {
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: var(--text-light);
     font-weight: 300;
     line-height: 1.7;
   }
 
-  /* ===== CSA SECTION ===== */
-  #csa { background: var(--warm-white); position: relative; overflow: hidden; }
+  /* ===== SUBSCRIPTION SECTION ===== */
+  #csa {
+    background: linear-gradient(160deg, var(--charcoal) 0%, #3a3530 100%);
+    position: relative; overflow: hidden; color: white;
+  }
+  #csa::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 20% 80%, rgba(139,158,126,0.15), transparent 60%),
+      radial-gradient(circle at 80% 20%, rgba(193,123,90,0.1), transparent 50%);
+  }
+  #csa .section-tag { color: var(--sage-light); }
+  #csa h2 { color: white; }
+  #csa h2 em { color: var(--terracotta-light); }
+  #csa .section-desc { color: rgba(255,255,255,0.7); }
 
   .csa-layout {
     max-width: 1100px;
@@ -542,38 +555,39 @@
   .hiw-step {
     text-align: center;
     padding: 32px 24px;
-    background: white;
+    background: rgba(255,255,255,0.08);
     border-radius: 20px;
     position: relative;
+    border: 1px solid rgba(255,255,255,0.1);
   }
 
   .hiw-number {
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     background: var(--terracotta);
     color: white;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-weight: 600;
     margin-bottom: 16px;
   }
 
   .hiw-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: 500;
     margin-bottom: 8px;
-    color: var(--charcoal);
+    color: white;
   }
 
   .hiw-desc {
-    font-size: 0.85rem;
-    color: var(--text-light);
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.65);
     font-weight: 300;
-    line-height: 1.6;
+    line-height: 1.7;
   }
 
   /* CSA Date Picker Card */
@@ -861,10 +875,10 @@
   }
 
   .seasonal-detail-card p {
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     color: var(--text-light);
     font-weight: 300;
-    line-height: 1.6;
+    line-height: 1.7;
   }
 
   /* ===== WEDDINGS ===== */
@@ -896,7 +910,7 @@
   .weddings-content h2 em { color: var(--terracotta-light); }
 
   .weddings-desc {
-    font-size: 1.05rem;
+    font-size: 1.15rem;
     color: rgba(255,255,255,0.7);
     font-weight: 300;
     line-height: 1.8;
@@ -918,7 +932,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: rgba(255,255,255,0.75);
     font-weight: 300;
   }
@@ -995,7 +1009,7 @@
   .about-text h2 { text-align: left; margin-bottom: 24px; }
 
   .about-text p {
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: var(--text-light);
     line-height: 1.8;
     margin-bottom: 20px;
@@ -1027,7 +1041,7 @@
   }
 
   .value-desc {
-    font-size: 0.78rem;
+    font-size: 0.9rem;
     color: var(--text-light);
     line-height: 1.5;
     font-weight: 300;
@@ -1053,7 +1067,7 @@
 
   .footer-brand p {
     color: rgba(255,255,255,0.5);
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 300;
     line-height: 1.7;
     max-width: 300px;
@@ -1071,7 +1085,7 @@
   .footer-links a {
     color: rgba(255,255,255,0.5);
     text-decoration: none;
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     font-weight: 300;
     transition: color 0.3s;
   }
@@ -1577,7 +1591,7 @@
   <a href="#" class="nav-logo"><img id="navLogoImg" src="/images/logo.png" alt="Beyond Measure Flowers"><span>Beyond Measure Flowers</span></a>
   <ul class="nav-links" id="navLinks">
     <li><a href="#shop">Market</a></li>
-    <li><a href="#csa">Flower CSA</a></li>
+    <li><a href="#csa">Summer Subscription</a></li>
     <li><a href="#seasonal">What's Blooming</a></li>
     <li><a href="#weddings">Events</a></li>
     <li><a href="#about">Our Story</a></li>
@@ -1598,7 +1612,7 @@
       <p class="hero-desc" id="heroDesc">Zinnias, sunflowers, celosia, and more — cultivated with care in Southwest Ohio. Fresh-cut from our field to your hands, July through first frost.</p>
       <div class="hero-actions">
         <a href="#shop" class="btn btn-primary">Shop Blooms</a>
-        <a href="#csa" class="btn btn-outline">Join Our CSA</a>
+        <a href="#csa" class="btn btn-outline">Summer Subscription</a>
       </div>
     </div>
     <div class="hero-visual">
@@ -1624,7 +1638,7 @@
 <!-- Season Banner -->
 <div class="season-banner">
   <span class="season-dot"></span>
-  <span id="seasonBanner">2026 Summer CSA — Now accepting signups · Limited spots available</span>
+  <span id="seasonBanner">2026 Summer Subscription — Now accepting signups · Limited spots available</span>
   <span class="season-dot"></span>
 </div>
 
@@ -1660,30 +1674,30 @@
   </div>
 </section>
 
-<!-- CSA Section -->
+<!-- Subscription Section -->
 <section id="csa">
   <div class="csa-layout">
     <div class="section-header reveal">
-      <div class="section-tag">Summer Flower CSA</div>
-      <h2>A Summer of <em>Blooms</em></h2>
-      <p class="section-desc" id="csaDesc">Pick 4 pickup dates and receive a gorgeous, hand-tied bouquet each time. Porch pickup from our home in Lebanon after 10am — address provided after purchase.</p>
+      <div class="section-tag">Summer Subscription</div>
+      <h2>Fresh Flowers, <em>All Summer Long</em></h2>
+      <p class="section-desc" id="csaDesc">Get a beautiful, hand-tied bouquet delivered to our porch for pickup on 4 dates of your choosing — one payment, four stunning seasonal arrangements throughout the summer.</p>
     </div>
 
     <div class="csa-how-it-works reveal">
       <div class="hiw-step">
         <div class="hiw-number">1</div>
-        <div class="hiw-title">Choose Your Dates</div>
-        <div class="hiw-desc">Select 4 pickup dates from our available Fridays, Tuesdays, and Saturdays throughout the season.</div>
+        <div class="hiw-title">Pick Your Dates</div>
+        <div class="hiw-desc">Choose 4 pickup dates that work for your schedule from our available Tuesdays, Fridays, and Saturdays.</div>
       </div>
       <div class="hiw-step">
         <div class="hiw-number">2</div>
-        <div class="hiw-title">Pay Once & You're Set</div>
-        <div class="hiw-desc">One simple payment covers all 4 of your bouquets for the summer. No subscriptions or recurring charges.</div>
+        <div class="hiw-title">One Simple Payment</div>
+        <div class="hiw-desc">Pay once and you're all set for the summer. No recurring charges, no commitments beyond your 4 bouquets.</div>
       </div>
       <div class="hiw-step">
         <div class="hiw-number">3</div>
         <div class="hiw-title">Pick Up & Enjoy</div>
-        <div class="hiw-desc">Pick up your fresh bouquet from our porch in Lebanon after 11am on your selected dates. Each one will be different — a seasonal surprise every time!</div>
+        <div class="hiw-desc">Grab your fresh bouquet from our porch in Lebanon on your selected dates. Every bouquet is different — a seasonal surprise each time!</div>
       </div>
     </div>
 
@@ -1702,7 +1716,7 @@
           <li class="csa-summary-empty">No dates selected yet — pick 4 above!</li>
         </ul>
         <div class="csa-price-row">
-          <span class="csa-price-label">4-Bouquet CSA Package</span>
+          <span class="csa-price-label">4-Bouquet Summer Subscription</span>
           <span class="csa-price-amount" id="csaPriceDisplay">$XX</span>
         </div>
       </div>
@@ -1833,7 +1847,7 @@
       <div class="footer-heading">Shop</div>
       <ul class="footer-links">
         <li><a href="#shop">Market Blooms</a></li>
-        <li><a href="#csa">Flower CSA</a></li>
+        <li><a href="#csa">Summer Subscription</a></li>
         <li><a href="#seasonal">What's Blooming</a></li>
       </ul>
     </div>
@@ -2072,7 +2086,7 @@ function renderCsaDates(){
   if(selectedCsaDates.length===0){sm.innerHTML='<li class="csa-summary-empty">No dates selected yet \u2014 pick 4 above!</li>';}
   else{sm.innerHTML=selectedCsaDates.map(function(id){var d=csaDates.find(function(x){return x.id===id;});return '<li>'+d.day+', '+d.date+'</li>';}).join('');}
   var btn=document.getElementById('csaCheckoutBtn');
-  if(selectedCsaDates.length===4){btn.classList.add('active');btn.textContent='Add CSA to Cart \u2014 $'+csaPrice;}
+  if(selectedCsaDates.length===4){btn.classList.add('active');btn.textContent='Add Subscription to Cart \u2014 $'+csaPrice;}
   else{btn.classList.remove('active');var r=4-selectedCsaDates.length;btn.textContent='Select '+r+' more date'+(r!==1?'s':'')+' to continue';}
 }
 
@@ -2090,10 +2104,10 @@ function csaCheckout(){
   if(!name||!email){showToast('Please enter your name and email before checking out.');return;}
   var labels=selectedCsaDates.map(function(id){var d=csaDates.find(function(x){return x.id===id;});return d.day+' '+d.date;});
   var existing=cart.find(function(item){return item.isCSA;});
-  if(existing){showToast('CSA already in your cart!');openCart();return;}
-  cart.push({id:'csa-'+Date.now(),name:'Summer Flower CSA',price:csaPrice,emoji:'\ud83c\udf38',bg:'linear-gradient(160deg, #C5D4B8, #8B9E7E)',qty:1,detail:'4 pickups: '+labels.join(', '),isCSA:true,csaDates:labels.join(', '),customerName:name,customerEmail:email});
+  if(existing){showToast('Subscription already in your cart!');openCart();return;}
+  cart.push({id:'csa-'+Date.now(),name:'Summer Subscription',price:csaPrice,emoji:'\ud83c\udf38',bg:'linear-gradient(160deg, #C5D4B8, #8B9E7E)',qty:1,detail:'4 pickups: '+labels.join(', '),isCSA:true,csaDates:labels.join(', '),customerName:name,customerEmail:email});
   renderCart();updateNavCart();openCart();
-  showToast('\ud83c\udf38 CSA added to cart!');
+  showToast('\ud83c\udf38 Subscription added to cart!');
 }
 
 function addProductToCart(index){
